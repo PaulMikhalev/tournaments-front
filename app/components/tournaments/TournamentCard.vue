@@ -1,25 +1,26 @@
 <template>
-  <UCard 
-    :ui="{
-      base: 'w-full cursor-pointer transition-all duration-300 group',
-      background: 'bg-mirage',
-      ring: 'ring-1 ring-inset',
-      divide: 'divide-y divide-gray-200 dark:divide-gray-800',
-      shadow: '',
-      body: {
-        base: 'p-6 flex flex-col gap-4',
-        background: '',
-        padding: ''
-      },
-      rounded: 'rounded-[14px]',
-      header: { padding: '' },
-      footer: { padding: '' }
-    }"
-    :class="{ 
-      'ring-turquoise-55 shadow-tournament': isFeatured,
-      'ring-oxford hover:ring-turquoise-55 hover:shadow-tournament': !isFeatured 
-    }"
-  >
+  <NuxtLink :to="`/tournaments/${tournament.id}`">
+    <UCard 
+      :ui="{
+        base: 'w-full cursor-pointer transition-all duration-300 group',
+        background: 'bg-mirage',
+        ring: 'ring-1 ring-inset',
+        divide: 'divide-y divide-gray-200 dark:divide-gray-800',
+        shadow: '',
+        body: {
+          base: 'p-6 flex flex-col gap-4',
+          background: '',
+          padding: ''
+        },
+        rounded: 'rounded-[14px]',
+        header: { padding: '' },
+        footer: { padding: '' }
+      }"
+      :class="{ 
+        'ring-turquoise-55 shadow-tournament': isFeatured,
+        'ring-oxford hover:ring-turquoise-55 hover:shadow-tournament': !isFeatured 
+      }"
+    >
       <!-- Header with Game Image and Info -->
       <div class="flex justify-between items-start">
         <div class="flex items-center gap-3">
@@ -125,9 +126,10 @@
             track: 'bg-oxford rounded-full',
             progress: 'bg-cyan-400 rounded-full transition-all duration-300'
           }"
-        />
-      </div>
-  </UCard>
+         />
+       </div>
+   </UCard>
+  </NuxtLink>
 </template>
 
 <script setup>
