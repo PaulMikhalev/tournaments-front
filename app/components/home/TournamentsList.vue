@@ -57,7 +57,7 @@ const tournaments = ref([
     maxParticipants: 16,
     status: 'live',
     progress: 75,
-    image: '/tournament-soulcalibur.jpg'
+    image: '/game-soulcalibur.png'
   },
   {
     id: 2,
@@ -69,7 +69,7 @@ const tournaments = ref([
     maxParticipants: 16,
     status: 'registration',
     progress: 50,
-    image: '/tournament-cs.jpg'
+    image: '/game-cs2.png'
   },
   {
     id: 3,
@@ -81,7 +81,7 @@ const tournaments = ref([
     maxParticipants: 16,
     status: 'registration',
     progress: 75,
-    image: '/tournament-dota.jpg'
+    image: '/game-dota2.png'
   },
   {
     id: 4,
@@ -93,7 +93,7 @@ const tournaments = ref([
     maxParticipants: 32,
     status: 'registration',
     progress: 25,
-    image: '/tournament-valorant.jpg'
+    image: '/game-valorant.png'
   },
   {
     id: 5,
@@ -105,7 +105,7 @@ const tournaments = ref([
     maxParticipants: 8,
     status: 'upcoming',
     progress: 63,
-    image: '/tournament-lol.jpg'
+    image: '/game-lol.png'
   },
   {
     id: 6,
@@ -117,7 +117,7 @@ const tournaments = ref([
     maxParticipants: 32,
     status: 'registration',
     progress: 75,
-    image: '/tournament-cs.jpg'
+    image: '/game-cs2.png'
   },
   {
     id: 7,
@@ -129,7 +129,7 @@ const tournaments = ref([
     maxParticipants: 16,
     status: 'registration',
     progress: 38,
-    image: '/tournament-dota.jpg'
+    image: '/game-dota2.png'
   }
 ])
 </script>
