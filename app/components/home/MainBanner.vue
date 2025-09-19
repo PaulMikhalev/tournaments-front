@@ -2,8 +2,12 @@
   <section class="relative bg-home-gradient">
     <!-- Background Container with Image and Overlay -->
     <div class="absolute inset-0 opacity-20">
-      <!-- Background Image Placeholder -->
-      <div class="w-full h-full bg-gradient-to-r from-ebony via-mirage to-ebony"></div>
+      <!-- Background Image -->
+      <img 
+        src="/banner-background.png" 
+        alt="Esports Tournament Background"
+        class="w-full h-full object-cover"
+      />
       <!-- Gradient Overlay -->
       <div class="absolute inset-0 bg-gradient-to-r from-ebony/80 to-ebony/60"></div>
     </div>
