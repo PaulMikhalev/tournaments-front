@@ -1,4 +1,65 @@
 <template>
+  <!-- Filters and Search Bar -->
+  <section class="bg-mirage-50 border-b border-oxford py-6 px-[208.5px] mb-8">
+    <div class="max-w-[1536px] mx-auto px-6">
+      <div class="flex items-center gap-4">
+        <!-- Left Side - Game Filter and Search -->
+        <div class="flex items-center gap-4 flex-1">
+          <!-- Game Filter Dropdown -->
+          <div class="w-64">
+            <div class="relative">
+              <select 
+                v-model="selectedGame"
+                class="w-full h-9 px-3 pr-8 bg-mine-shaft-30 border border-river-bed rounded-lg text-[12.8px] leading-[1.563] text-silver-chalice appearance-none focus:outline-none focus:border-gray-chateau"
+              >
+                <option value="">Все игры</option>
+                <option value="Soulcalibur VI">Soulcalibur VI</option>
+                <option value="Counter-Strike 2">Counter-Strike 2</option>
+                <option value="Dota 2">Dota 2</option>
+                <option value="Valorant">Valorant</option>
+                <option value="League of Legends">League of Legends</option>
+              </select>
+              <!-- Dropdown Arrow -->
+              <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none opacity-50">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 6L8 10L12 6" stroke="#A1A1A1" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Search Input -->
+          <div class="flex-1 max-w-md">
+            <div class="relative">
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Поиск турниров..."
+                class="w-full h-9 pl-10 pr-4 bg-mine-shaft-30 border border-river-bed rounded-lg text-[12.9px] leading-[1.21] text-gray-chateau placeholder-gray-chateau focus:outline-none focus:border-gray-chateau"
+              />
+              <!-- Search Icon -->
+              <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.11 11.11L13.33 13.33" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 7.33C2 10.28 4.38 12.67 7.33 12.67C10.28 12.67 12.67 10.28 12.67 7.33C12.67 4.38 10.28 2 7.33 2C4.38 2 2 4.38 2 7.33Z" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Side - Filters Button -->
+        <button class="flex items-center gap-2 h-9 px-3 bg-mine-shaft-30 border border-mine-shaft rounded-lg text-[13.23px] leading-[1.511] font-medium text-mischka hover:bg-mine-shaft/50 transition-colors duration-200">
+          <!-- Filter Icon -->
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.33 2H14.67V4.67H1.33V2Z" stroke="#D1D5DC" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Фильтры
+        </button>
+      </div>
+    </div>
+  </section>
+
   <section class="bg-ebony py-12 lg:py-[48px] px-4 lg:px-[184.5px]">
     <div class="max-w-[1536px] mx-auto px-6">
       <!-- Section Header -->
@@ -22,64 +83,7 @@
         </div>
       </div>
 
-      <!-- Filters and Search Bar -->
-      <div class="bg-mirage-50 border-b border-oxford py-6 px-[208.5px] mb-8">
-        <div class="flex items-center gap-4">
-          <!-- Left Side - Game Filter and Search -->
-          <div class="flex items-center gap-4 flex-1">
-            <!-- Game Filter Dropdown -->
-            <div class="w-64">
-              <div class="relative">
-                <select 
-                  v-model="selectedGame"
-                  class="w-full h-9 px-3 pr-8 bg-mine-shaft-30 border border-river-bed rounded-lg text-[12.8px] leading-[1.563] text-silver-chalice appearance-none focus:outline-none focus:border-gray-chateau"
-                >
-                  <option value="">Все игры</option>
-                  <option value="Soulcalibur VI">Soulcalibur VI</option>
-                  <option value="Counter-Strike 2">Counter-Strike 2</option>
-                  <option value="Dota 2">Dota 2</option>
-                  <option value="Valorant">Valorant</option>
-                  <option value="League of Legends">League of Legends</option>
-                </select>
-                <!-- Dropdown Arrow -->
-                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none opacity-50">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6L8 10L12 6" stroke="#A1A1A1" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Search Input -->
-            <div class="flex-1 max-w-md">
-              <div class="relative">
-                <input
-                  v-model="searchQuery"
-                  type="text"
-                  placeholder="Поиск турниров..."
-                  class="w-full h-9 pl-10 pr-4 bg-mine-shaft-30 border border-river-bed rounded-lg text-[12.9px] leading-[1.21] text-gray-chateau placeholder-gray-chateau focus:outline-none focus:border-gray-chateau"
-                />
-                <!-- Search Icon -->
-                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.11 11.11L13.33 13.33" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 7.33C2 10.28 4.38 12.67 7.33 12.67C10.28 12.67 12.67 10.28 12.67 7.33C12.67 4.38 10.28 2 7.33 2C4.38 2 2 4.38 2 7.33Z" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Right Side - Filters Button -->
-          <button class="flex items-center gap-2 h-9 px-3 bg-mine-shaft-30 border border-mine-shaft rounded-lg text-[13.23px] leading-[1.511] font-medium text-mischka hover:bg-mine-shaft/50 transition-colors duration-200">
-            <!-- Filter Icon -->
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1.33 2H14.67V4.67H1.33V2Z" stroke="#D1D5DC" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Фильтры
-          </button>
-        </div>
-      </div>
+      
 
       <!-- Tournaments Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 mb-4">
