@@ -43,55 +43,108 @@
         <div class="hidden lg:flex items-center">
           <!-- Создать Button -->
           <div class="pr-4 h-9">
-            <button class="flex items-center justify-center gap-2 px-3 py-2 h-9 rounded-lg hover:bg-mirage/50 transition-colors duration-200">
-              <div class="w-4 h-4">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.33 8H12.67" stroke="#D1D5DC" stroke-width="1.33"/>
-                  <path d="M8 3.33V12.67" stroke="#D1D5DC" stroke-width="1.33"/>
-                </svg>
-              </div>
-              <span class="text-mischka font-medium text-[13.78px] leading-[1.45]">Создать</span>
-            </button>
+            <UButton
+              color="white"
+              variant="ghost"
+              size="sm"
+              icon="i-heroicons-plus"
+              :ui="{
+                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
+                padding: 'px-3 py-2',
+                gap: 'gap-2',
+                color: {
+                  white: {
+                    ghost: 'text-mischka hover:bg-mirage/50'
+                  }
+                }
+              }"
+            >
+              Создать
+            </UButton>
           </div>
           
           <!-- Управление Button -->
           <div class="pr-4 h-9">
-            <button class="flex items-center justify-center gap-2 px-3 py-2 h-9 rounded-lg hover:bg-mirage/50 transition-colors duration-200">
-              <div class="w-4 h-4">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.03 1.34H13.97V14.65H2.03V1.34Z" stroke="#D1D5DC" stroke-width="1.33"/>
-                  <path d="M6 6H10V10H6V6Z" stroke="#D1D5DC" stroke-width="1.33"/>
-                </svg>
-              </div>
-              <span class="text-mischka font-medium text-[13.78px] leading-[1.45]">Управление</span>
-            </button>
+            <UButton
+              color="white"
+              variant="ghost"
+              size="sm"
+              icon="i-heroicons-squares-2x2"
+              :ui="{
+                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
+                padding: 'px-3 py-2',
+                gap: 'gap-2',
+                color: {
+                  white: {
+                    ghost: 'text-mischka hover:bg-mirage/50'
+                  }
+                }
+              }"
+            >
+              Управление
+            </UButton>
           </div>
           
           <!-- Войти Button -->
           <div class="pr-4 h-9">
-            <button class="flex items-center justify-center px-4 py-2 h-9 rounded-lg hover:bg-mirage/50 transition-colors duration-200">
-              <span class="text-mischka font-medium text-[13.78px] leading-[1.45]">Войти</span>
-            </button>
+            <UButton
+              color="white"
+              variant="ghost"
+              size="sm"
+              :ui="{
+                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
+                padding: 'px-4 py-2',
+                color: {
+                  white: {
+                    ghost: 'text-mischka hover:bg-mirage/50'
+                  }
+                }
+              }"
+            >
+              Войти
+            </UButton>
           </div>
           
           <!-- Регистрация Button -->
           <div class="pr-4 h-9">
-            <button class="flex items-center justify-center px-4 py-2 h-9 rounded-lg hover:bg-mirage/50 transition-colors duration-200">
-              <span class="text-mischka font-medium text-[13.78px] leading-[1.45]">Регистрация</span>
-            </button>
+            <UButton
+              color="white"
+              variant="ghost"
+              size="sm"
+              :ui="{
+                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
+                padding: 'px-4 py-2',
+                color: {
+                  white: {
+                    ghost: 'text-mischka hover:bg-mirage/50'
+                  }
+                }
+              }"
+            >
+              Регистрация
+            </UButton>
           </div>
           
           <!-- Профиль Button (Active) -->
           <div class="h-9">
-            <button class="flex items-center justify-center gap-2 px-3 py-2 h-9 bg-cyan-400 rounded-lg hover:bg-cyan-500 transition-colors duration-200">
-              <div class="w-4 h-4">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.33 10H12.67V14H3.33V10Z" stroke="#000000" stroke-width="1.33"/>
-                  <path d="M5.33 2H10.67V7.33H5.33V2Z" stroke="#000000" stroke-width="1.33"/>
-                </svg>
-              </div>
-              <span class="text-black font-medium text-[13.78px] leading-[1.45]">Профиль</span>
-            </button>
+            <UButton
+              color="cyan"
+              variant="solid"
+              size="sm"
+              icon="i-heroicons-user"
+              :ui="{
+                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
+                padding: 'px-3 py-2',
+                gap: 'gap-2',
+                color: {
+                  cyan: {
+                    solid: 'text-black bg-cyan-400 hover:bg-cyan-500'
+                  }
+                }
+              }"
+            >
+              Профиль
+            </UButton>
           </div>
         </div>
 

@@ -36,28 +36,51 @@
         <!-- Action Buttons -->
         <div class="flex justify-center gap-4 mb-[41px]">
           <!-- Создать турнир Button (Primary) -->
-          <button class="flex items-center justify-center gap-2 px-4 py-4 h-10 bg-cyan-400 rounded-lg hover:bg-cyan-500 transition-colors duration-200">
-            <!-- Plus Icon -->
-            <div class="w-4 h-4">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.33 8H12.67" stroke="#000000" stroke-width="1.33"/>
-                <path d="M8 3.33V12.67" stroke="#000000" stroke-width="1.33"/>
-              </svg>
-            </div>
-            <span class="text-[13.78px] leading-[1.45] font-medium text-black">Создать турнир</span>
-          </button>
+          <UButton
+            color="cyan"
+            variant="solid"
+            size="md"
+            icon="i-heroicons-plus"
+            :ui="{
+              base: 'h-10 text-[13.78px] leading-[1.45] font-medium',
+              padding: 'px-4 py-4',
+              gap: 'gap-2',
+              color: {
+                cyan: {
+                  solid: 'shadow-sm text-black bg-cyan-400 hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400'
+                }
+              }
+            }"
+          >
+            Создать турнир
+          </UButton>
           
           <!-- Искать турниры Button (Secondary) -->
-          <button class="flex items-center justify-center gap-2 px-[17px] py-4 h-10 bg-mine-shaft-30 border border-mine-shaft rounded-lg hover:bg-mine-shaft/50 transition-colors duration-200">
-            <!-- Search Icon -->
-            <div class="w-4 h-4">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.11 11.11L13.33 13.33" stroke="#00FFE0" stroke-width="1.33"/>
-                <path d="M2 7.33C2 10.28 4.38 12.67 7.33 12.67C10.28 12.67 12.67 10.28 12.67 7.33C12.67 4.38 10.28 2 7.33 2C4.38 2 2 4.38 2 7.33Z" stroke="#00FFE0" stroke-width="1.33"/>
-              </svg>
-            </div>
-            <span class="text-[13.78px] leading-[1.45] font-medium text-cyan-400">Искать турниры</span>
-          </button>
+          <UButton
+            color="white"
+            variant="outline"
+            size="md"
+            icon="i-heroicons-magnifying-glass"
+            :ui="{
+              base: 'h-10 text-[13.78px] leading-[1.45] font-medium',
+              padding: 'px-[17px] py-4',
+              gap: 'gap-2',
+              color: {
+                white: {
+                  outline: 'shadow-sm bg-mine-shaft-30 text-cyan-400 ring-1 ring-inset ring-mine-shaft hover:bg-mine-shaft/50'
+                }
+              },
+              icon: {
+                leading: {
+                  wrapper: 'flex items-center',
+                  pointer: 'pointer-events-none',
+                  padding: ''
+                }
+              }
+            }"
+          >
+            Искать турниры
+          </UButton>
         </div>
         
         <!-- Statistics -->

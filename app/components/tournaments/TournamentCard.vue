@@ -1,12 +1,25 @@
 <template>
-  <div 
-    class="w-[480px] bg-mirage border border-oxford rounded-[14px] p-1"
+  <UCard 
+    :ui="{
+      base: 'w-full',
+      background: 'bg-mirage',
+      ring: 'ring-1 ring-inset',
+      divide: 'divide-y divide-gray-200 dark:divide-gray-800',
+      shadow: '',
+      body: {
+        base: 'p-6 flex flex-col gap-4',
+        background: '',
+        padding: ''
+      },
+      rounded: 'rounded-[14px]',
+      header: { padding: '' },
+      footer: { padding: '' }
+    }"
     :class="{ 
-      'border-turquoise-55 shadow-tournament': isFeatured,
-      'border-oxford': !isFeatured 
+      'ring-turquoise-55 shadow-tournament': isFeatured,
+      'ring-oxford': !isFeatured 
     }"
   >
-    <div class="p-6 flex flex-col gap-4">
       <!-- Header with Game Image and Info -->
       <div class="flex justify-between items-start">
         <div class="flex items-center gap-3">
@@ -31,12 +44,19 @@
         </div>
         
         <!-- Status Badge -->
-        <div 
-          class="px-2 py-1 rounded-lg text-[12.14px] leading-[1.647] font-medium"
-          :class="statusBadgeClasses"
-        >
-          {{ statusText }}
-        </div>
+        <UBadge
+          :label="statusText"
+          :color="statusBadgeColor"
+          :variant="statusBadgeVariant"
+          size="sm"
+          :ui="{
+            base: 'text-[12.14px] leading-[1.647] font-medium',
+            rounded: 'rounded-lg',
+            size: {
+              sm: 'px-2 py-1'
+            }
+          }"
+        />
       </div>
       
       <!-- Tournament Details -->
@@ -92,15 +112,18 @@
           <span class="text-[11.06px] leading-[1.446] text-gray-chateau">Заполнено</span>
           <span class="text-[11.06px] leading-[1.446] text-gray-chateau">{{ tournament.progress }}%</span>
         </div>
-        <div class="w-full h-2 bg-oxford rounded-full overflow-hidden">
-          <div 
-            class="h-full bg-cyan-400 rounded-full transition-all duration-300"
-            :style="{ width: `${tournament.progress}%` }"
-          ></div>
-        </div>
+        <UProgress
+          :value="tournament.progress"
+          :max="100"
+          color="cyan"
+          :ui="{
+            base: 'w-full h-2',
+            track: 'bg-oxford rounded-full',
+            progress: 'bg-cyan-400 rounded-full transition-all duration-300'
+          }"
+        />
       </div>
-    </div>
-  </div>
+  </UCard>
 </template>
 
 <script setup>
@@ -115,17 +138,21 @@ const props = defineProps({
   }
 })
 
-const statusBadgeClasses = computed(() => {
+const statusBadgeColor = computed(() => {
   switch (props.tournament.status) {
     case 'live':
-      return 'bg-red-orange text-white'
+      return 'red'
     case 'registration':
-      return 'bg-cyan-400 text-black'
+      return 'cyan'
     case 'upcoming':
-      return 'bg-selective-yellow text-black'
+      return 'yellow'
     default:
-      return 'bg-oxford text-gray-chateau'
+      return 'gray'
   }
+})
+
+const statusBadgeVariant = computed(() => {
+  return 'solid'
 })
 
 const statusText = computed(() => {
