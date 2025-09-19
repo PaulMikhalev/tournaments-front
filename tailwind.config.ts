@@ -50,7 +50,10 @@ export default {
         mischka: '#D1D5DC',
         'gray-chateau': '#99A1AF',
         'mine-shaft': '#262626',
-        'mine-shaft-30': 'rgba(38, 38, 38, 0.3)'
+        'mine-shaft-30': 'rgba(38, 38, 38, 0.3)',
+        'red-orange': '#FB2C36',
+        'selective-yellow': '#F0B100',
+        'turquoise-55': 'rgba(46, 221, 199, 0.55)'
       },
       screens: {
         'xs': '390px',
@@ -64,6 +67,9 @@ export default {
         '88': '22rem',
         '112': '28rem',
         '128': '32rem'
+      },
+      boxShadow: {
+        'tournament': '0px 3.63px 5.45px -3.63px rgba(0, 255, 224, 0.09), 0px 9.09px 13.63px -2.73px rgba(0, 255, 224, 0.09)'
       }
     }
   },
