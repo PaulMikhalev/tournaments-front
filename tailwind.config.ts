@@ -47,7 +47,10 @@ export default {
         ebony: '#101828',
         mirage: '#1E2939',
         oxford: '#364153',
-        mischka: '#D1D5DC'
+        mischka: '#D1D5DC',
+        'gray-chateau': '#99A1AF',
+        'mine-shaft': '#262626',
+        'mine-shaft-30': 'rgba(38, 38, 38, 0.3)'
       },
       screens: {
         'xs': '390px',
