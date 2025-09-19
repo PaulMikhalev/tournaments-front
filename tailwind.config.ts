@@ -46,7 +46,8 @@ export default {
         },
         ebony: '#101828',
         mirage: '#1E2939',
-        oxford: '#364153'
+        oxford: '#364153',
+        mischka: '#D1D5DC'
       },
       screens: {
         'xs': '390px',
