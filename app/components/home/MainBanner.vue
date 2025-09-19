@@ -1,17 +1,87 @@
 <template>
-  <section class="bg-[rgba(30,41,57,0.5)] border border-[rgba(54,65,83,1)] rounded-2xl shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-10 lg:py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-8">
-      <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left gap-6">
-        <h1 class="text-4xl lg:text-6xl font-bold leading-tight text-white">Онлайн турниры для всех</h1>
-        <p class="text-base lg:text-lg text-gray-300 max-w-xl">Участвуй, побеждай и получай призы! Присоединяйся к сообществу игроков прямо сейчас.</p>
-        <div class="flex items-center gap-4">
-          <button class="bg-blue-600 text-white font-medium px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">Принять участие</button>
-          <NuxtLink to="/" class="text-white/80 hover:text-white transition">Подробнее</NuxtLink>
+  <section class="relative overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-banner-gradient"></div>
+    
+    <!-- Content -->
+    <div class="relative max-w-[1920px] mx-auto px-4 xs:px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <div class="py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Main heading -->
+          <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 xs:mb-8 sm:mb-10 md:mb-12 leading-tight">
+            Создавайте и участвуйте в
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-purple-400">
+              турнирах
+            </span>
+          </h1>
+          
+          <!-- Subtitle -->
+          <p class="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/80 mb-8 xs:mb-10 sm:mb-12 md:mb-16 lg:mb-20 max-w-3xl mx-auto leading-relaxed">
+            Платформа для организации и проведения киберспортивных соревнований
+          </p>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col xs:flex-row gap-4 xs:gap-6 sm:gap-8 justify-center items-center">
+            <NuxtLink
+              to="/tournaments"
+              class="w-full xs:w-auto inline-flex items-center justify-center px-6 xs:px-8 sm:px-10 md:px-12 py-3 xs:py-4 sm:py-5 md:py-6 text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-lg xs:rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Найти турнир
+            </NuxtLink>
+            <NuxtLink
+              to="/create"
+              class="w-full xs:w-auto inline-flex items-center justify-center px-6 xs:px-8 sm:px-10 md:px-12 py-3 xs:py-4 sm:py-5 md:py-6 text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-primary-400 bg-transparent border-2 border-primary-400 hover:bg-primary-400 hover:text-white rounded-lg xs:rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105"
+            >
+              Создать турнир
+            </NuxtLink>
+          </div>
+          
+          <!-- Stats -->
+          <div class="mt-16 xs:mt-20 sm:mt-24 md:mt-28 lg:mt-32 grid grid-cols-2 md:grid-cols-4 gap-6 xs:gap-8 sm:gap-12">
+            <div class="text-center">
+              <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 xs:mb-3 sm:mb-4">
+                500+
+              </div>
+              <div class="text-sm xs:text-base sm:text-lg md:text-xl text-white/60">
+                Турниров
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 xs:mb-3 sm:mb-4">
+                10K+
+              </div>
+              <div class="text-sm xs:text-base sm:text-lg md:text-xl text-white/60">
+                Игроков
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 xs:mb-3 sm:mb-4">
+                $50K+
+              </div>
+              <div class="text-sm xs:text-base sm:text-lg md:text-xl text-white/60">
+                Призовых
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 xs:mb-3 sm:mb-4">
+                24/7
+              </div>
+              <div class="text-sm xs:text-base sm:text-lg md:text-xl text-white/60">
+                Поддержка
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex-1 flex justify-center lg:justify-end">
-        <img src="/banner-placeholder.png" alt="Турнирный баннер" class="w-60 lg:w-[26rem] h-auto rounded-xl shadow-lg object-cover" />
-      </div>
     </div>
+    
+    <!-- Decorative elements -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-primary-500/10 rounded-full blur-xl"></div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-xl"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-primary-400/5 rounded-full blur-lg"></div>
   </section>
 </template>
+
+<script setup>
+// MainBanner component - no additional logic needed for now
+</script>
