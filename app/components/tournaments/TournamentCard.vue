@@ -1,7 +1,7 @@
 <template>
   <UCard 
     :ui="{
-      base: 'w-full',
+      base: 'w-full cursor-pointer transition-all duration-300 group',
       background: 'bg-mirage',
       ring: 'ring-1 ring-inset',
       divide: 'divide-y divide-gray-200 dark:divide-gray-800',
@@ -17,7 +17,7 @@
     }"
     :class="{ 
       'ring-turquoise-55 shadow-tournament': isFeatured,
-      'ring-oxford': !isFeatured 
+      'ring-oxford hover:ring-turquoise-55 hover:shadow-tournament': !isFeatured 
     }"
   >
       <!-- Header with Game Image and Info -->
@@ -34,7 +34,11 @@
           
           <!-- Tournament Info -->
           <div class="flex flex-col gap-1">
-            <h3 class="text-[15.125px] leading-[1.587] font-semibold text-white" :class="{ 'text-cyan-400': isFeatured }">
+            <h3 class="text-[15.125px] leading-[1.587] font-semibold transition-colors duration-300" 
+                :class="{ 
+                  'text-cyan-400': isFeatured,
+                  'text-white group-hover:text-cyan-400': !isFeatured 
+                }">
               {{ tournament.title }}
             </h3>
             <p class="text-[11.06px] leading-[1.446] text-gray-chateau">
