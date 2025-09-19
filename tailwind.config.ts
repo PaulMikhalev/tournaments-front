@@ -53,7 +53,10 @@ export default {
         'mine-shaft-30': 'rgba(38, 38, 38, 0.3)',
         'red-orange': '#FB2C36',
         'selective-yellow': '#F0B100',
-        'turquoise-55': 'rgba(46, 221, 199, 0.55)'
+        'turquoise-55': 'rgba(46, 221, 199, 0.55)',
+        'mirage-50': 'rgba(30, 41, 57, 0.5)',
+        'river-bed': '#4A5565',
+        'silver-chalice': '#A1A1A1'
       },
       screens: {
         'xs': '390px',
