@@ -1,151 +1,58 @@
 <template>
-  <header class="sticky top-0 z-50 bg-ebony/95 backdrop-blur-md border-b border-mirage">
-    <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-52">
-      <nav class="h-16 lg:h-[65px] flex items-center justify-between gap-4 lg:gap-48">
+  <header class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+    <div class="backdrop-blur-sm bg-[rgba(16,24,40,0.95)] border-b border-[#1e2939] px-[208.5px] py-4 pointer-events-auto">
+      <div class="flex items-center justify-between gap-[188.3px]">
         <!-- Logo -->
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 flex items-center justify-center">
-            <!-- Custom Tournament Icon -->
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.33 19.55H13.33V29.31H9.33V19.55Z" stroke="#00FFE0" stroke-width="2.67"/>
-              <path d="M18.67 19.55H22.67V29.31H18.67V19.55Z" stroke="#00FFE0" stroke-width="2.67"/>
-              <path d="M24 5.33H29.33V12H24V5.33Z" stroke="#00FFE0" stroke-width="2.67"/>
-              <path d="M5.33 29.33H26.67" stroke="#00FFE0" stroke-width="2.67"/>
-              <path d="M8 2.67H24V20H8V2.67Z" stroke="#00FFE0" stroke-width="2.67"/>
-              <path d="M2.67 5.33H8V12H2.67V5.33Z" stroke="#00FFE0" stroke-width="2.67"/>
-            </svg>
-          </div>
+        <div class="flex items-center">
+          <svg class="w-8 h-8 mr-2" viewBox="0 0 32 32" fill="none">
+            <path d="M16 4L20 12L28 16L20 20L16 28L12 20L4 16L12 12L16 4Z" fill="#00ffe0"/>
+          </svg>
           <NuxtLink to="/" class="select-none">
-            <span class="text-white font-bold text-[18.75px] leading-[1.49]">CyberTournaments</span>
+            <span class="text-[18.75px] font-bold text-white leading-[28px]">CyberTournaments</span>
           </NuxtLink>
         </div>
-
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center">
-          <div class="w-[90px] h-6">
-            <NuxtLink to="/" class="text-white font-normal text-[14.5px] leading-[1.66] hover:text-cyan-400 transition-colors duration-200">
-              Главная
-            </NuxtLink>
-          </div>
-          <div class="w-[97px] h-6">
-            <NuxtLink to="/tournaments" class="text-mischka font-normal text-[14.5px] leading-[1.66] hover:text-white transition-colors duration-200">
-              Турниры
-            </NuxtLink>
-          </div>
-          <div class="h-6">
-            <NuxtLink to="/results" class="text-mischka font-normal text-[14.5px] leading-[1.66] hover:text-white transition-colors duration-200">
-              Результаты
-            </NuxtLink>
-          </div>
+        
+        <!-- Navigation -->
+        <nav class="flex items-center space-x-8">
+          <NuxtLink to="/" class="text-[14.5px] text-white leading-[24px] hover:text-[#00ffe0] transition-colors duration-200">
+            Главная
+          </NuxtLink>
+          <NuxtLink to="/tournaments" class="text-[15.125px] text-[#d1d5dc] leading-[24px] hover:text-white transition-colors duration-200">
+            Турниры
+          </NuxtLink>
+          <NuxtLink to="/results" class="text-[14.5px] text-[#d1d5dc] leading-[24px] hover:text-white transition-colors duration-200">
+            Результаты
+          </NuxtLink>
         </nav>
-
-        <!-- Desktop Buttons -->
-        <div class="hidden lg:flex items-center">
-          <!-- Создать Button -->
-          <div class="pr-4 h-9">
-            <UButton
-              color="white"
-              variant="ghost"
-              size="sm"
-              icon="i-heroicons-plus"
-              :ui="{
-                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
-                padding: 'px-3 py-2',
-                gap: 'gap-2',
-                color: {
-                  white: {
-                    ghost: 'text-mischka hover:bg-mirage/50'
-                  }
-                }
-              }"
-            >
-              Создать
-            </UButton>
-          </div>
-          
-          <!-- Управление Button -->
-          <div class="pr-4 h-9">
-            <UButton
-              color="white"
-              variant="ghost"
-              size="sm"
-              icon="i-heroicons-squares-2x2"
-              :ui="{
-                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
-                padding: 'px-3 py-2',
-                gap: 'gap-2',
-                color: {
-                  white: {
-                    ghost: 'text-mischka hover:bg-mirage/50'
-                  }
-                }
-              }"
-            >
-              Управление
-            </UButton>
-          </div>
-          
-          <!-- Войти Button -->
-          <div class="pr-4 h-9">
-            <UButton
-              color="white"
-              variant="ghost"
-              size="sm"
-              :ui="{
-                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
-                padding: 'px-4 py-2',
-                color: {
-                  white: {
-                    ghost: 'text-mischka hover:bg-mirage/50'
-                  }
-                }
-              }"
-            >
-              Войти
-            </UButton>
-          </div>
-          
-          <!-- Регистрация Button -->
-          <div class="pr-4 h-9">
-            <UButton
-              color="white"
-              variant="ghost"
-              size="sm"
-              :ui="{
-                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
-                padding: 'px-4 py-2',
-                color: {
-                  white: {
-                    ghost: 'text-mischka hover:bg-mirage/50'
-                  }
-                }
-              }"
-            >
-              Регистрация
-            </UButton>
-          </div>
-          
-          <!-- Профиль Button (Active) -->
-          <div class="h-9">
-            <UButton
-              color="cyan"
-              variant="solid"
-              size="sm"
-              icon="i-heroicons-user"
-              :ui="{
-                base: 'h-9 text-[13.78px] leading-[1.45] font-medium',
-                padding: 'px-3 py-2',
-                gap: 'gap-2',
-                color: {
-                  cyan: {
-                    solid: 'text-black bg-cyan-400 hover:bg-cyan-500'
-                  }
-                }
-              }"
-            >
-              Профиль
-            </UButton>
-          </div>
+        
+        <!-- User Actions -->
+        <div class="flex items-center space-x-4">
+          <button class="flex items-center gap-2 px-3 py-2 text-[12.688px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+              <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1" fill="none"/>
+              <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1" fill="none"/>
+            </svg>
+            Создать
+          </button>
+          <button class="flex items-center gap-2 px-3 py-2 text-[13.344px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1"/>
+              <path d="M8 3v2M8 11v2M3 8h2M11 8h2" stroke="currentColor" stroke-width="1"/>
+            </svg>
+            Управление
+          </button>
+          <button class="px-4 py-2 text-[13.453px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
+            Войти
+          </button>
+          <button class="px-4 py-2 text-[12.797px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
+            Регистрация
+          </button>
+          <button class="bg-[#00ffe0] text-black px-3 py-2 rounded-[8px] flex items-center gap-2 text-[13.781px] font-medium leading-[20px] hover:bg-[#00d4c4] transition-colors duration-200">
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM4 12a4 4 0 118 0v2H4v-2z"/>
+            </svg>
+            Профиль
+          </button>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -167,7 +74,7 @@
             :class="{ '-rotate-45 -translate-y-1.5': isMobileMenuOpen }"
           ></span>
         </button>
-      </nav>
+      </div>
     </div>
 
     <!-- Mobile Menu -->

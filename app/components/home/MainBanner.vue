@@ -1,119 +1,65 @@
 <template>
-  <section class="relative bg-home-gradient">
-    <!-- Background Container with Image and Overlay -->
+  <!-- Hero Section -->
+  <section class="relative px-[504.5px] py-[80px] overflow-hidden">
+    <!-- Background with Gradient -->
     <div class="absolute inset-0 opacity-20">
-      <!-- Background Image -->
       <img 
-        src="/banner-background.png" 
-        alt="Esports Tournament Background"
+        :src="heroBackgroundImage" 
+        alt="Esports Tournament"
         class="w-full h-full object-cover"
       />
-      <!-- Gradient Overlay -->
-      <div class="absolute inset-0 bg-gradient-to-r from-ebony/80 to-ebony/60"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[rgba(16,24,40,0.8)] to-[rgba(16,24,40,0.6)]" />
     </div>
     
-    <!-- Content Container -->
-    <div class="relative px-4 lg:px-[208.5px] py-20">
-      <div class="max-w-[896px] mx-auto text-center">
-        <!-- Main Heading -->
-        <div class="mb-6">
-          <h1 class="text-[58.59px] font-bold leading-[1.024] text-white mb-0">
-            Киберспортивные
-          </h1>
-          <h1 class="text-[58.59px] font-bold leading-[1.024] text-cyan-400">
-            Турниры
-          </h1>
+    <!-- Hero Content -->
+    <div class="relative max-w-[896px] mx-auto text-center">
+      <div class="mb-[23.3px]">
+        <h1 class="text-[57.773px] font-bold text-white leading-[60px] mb-0">
+          Киберспортивные
+        </h1>
+        <h1 class="text-[58.594px] font-bold text-[#00ffe0] leading-[60px]">
+          Турниры
+        </h1>
+      </div>
+      
+      <div class="max-w-[672px] mx-auto mb-[16.7px]">
+        <p class="text-[18.594px] text-[#d1d5dc] leading-[32.5px]">
+          Участвуйте в турнирах по популярным играм, соревнуйтесь с лучшими<br>
+          игроками и выигрывайте призы
+        </p>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="flex gap-4 justify-center mb-[40.7px]">
+        <button class="bg-[#00ffe0] text-black px-4 py-2 rounded-[8px] flex items-center gap-2 font-semibold text-[16.453px] leading-[28px] hover:bg-[#00d4c4] transition-colors duration-200">
+          <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1.33" fill="none"/>
+            <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1.33" fill="none"/>
+          </svg>
+          Создать турнир
+        </button>
+        <button class="bg-[rgba(38,38,38,0.3)] text-[#00ffe0] px-4 py-2 rounded-[8px] border border-neutral-800 flex items-center gap-2 font-semibold text-[16.734px] leading-[28px] hover:bg-[rgba(38,38,38,0.5)] transition-colors duration-200">
+          <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.33"/>
+            <path d="m14 14-6-6" stroke="currentColor" stroke-width="1.33"/>
+          </svg>
+          Искать турниры
+        </button>
+      </div>
+      
+      <!-- Statistics -->
+      <div class="flex gap-8 justify-center">
+        <div class="text-center">
+          <div class="text-[27.656px] font-bold text-white leading-[36px]">250+</div>
+          <div class="text-[13.016px] text-[#99a1af] leading-[20px]">Активных турниров</div>
         </div>
-        
-        <!-- Description -->
-        <div class="mb-[17px] max-w-[672px] mx-auto">
-          <p class="text-[11.06px] leading-[1.446] text-mischka">
-            Участвуйте в турнирах по популярным играм, соревнуйтесь с лучшими<br>
-            игроками и выигрывайте призы
-          </p>
+        <div class="text-center">
+          <div class="text-[30px] font-bold text-white leading-[36px]">15K+</div>
+          <div class="text-[13.125px] text-[#99a1af] leading-[20px]">Участников</div>
         </div>
-        
-        <!-- Action Buttons -->
-        <div class="flex justify-center gap-4 mb-[41px]">
-          <!-- Создать турнир Button (Primary) -->
-          <UButton
-            color="cyan"
-            variant="solid"
-            size="md"
-            icon="i-heroicons-plus"
-            :ui="{
-              base: 'h-10 text-[13.78px] leading-[1.45] font-medium',
-              padding: 'px-4 py-4',
-              gap: 'gap-2',
-              color: {
-                cyan: {
-                  solid: 'shadow-sm text-black bg-cyan-400 hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400'
-                }
-              }
-            }"
-          >
-            Создать турнир
-          </UButton>
-          
-          <!-- Искать турниры Button (Secondary) -->
-          <UButton
-            color="white"
-            variant="outline"
-            size="md"
-            icon="i-heroicons-magnifying-glass"
-            :ui="{
-              base: 'h-10 text-[13.78px] leading-[1.45] font-medium',
-              padding: 'px-[17px] py-4',
-              gap: 'gap-2',
-              color: {
-                white: {
-                  outline: 'shadow-sm bg-mine-shaft-30 text-cyan-400 ring-1 ring-inset ring-mine-shaft hover:bg-mine-shaft/50'
-                }
-              },
-              icon: {
-                leading: {
-                  wrapper: 'flex items-center',
-                  pointer: 'pointer-events-none',
-                  padding: ''
-                }
-              }
-            }"
-          >
-            Искать турниры
-          </UButton>
-        </div>
-        
-        <!-- Statistics -->
-        <div class="flex justify-center gap-8">
-          <!-- 250+ Активных турниров -->
-          <div class="text-center">
-            <div class="text-[18.75px] leading-[1.493] font-bold text-white mb-0">
-              250+
-            </div>
-            <div class="text-[11.06px] leading-[1.446] text-gray-chateau">
-              Активных турниров
-            </div>
-          </div>
-          
-          <!-- 15K+ Участников -->
-          <div class="text-center">
-            <div class="text-[18.75px] leading-[1.493] font-bold text-white mb-0">
-              15K+
-            </div>
-            <div class="text-[11.06px] leading-[1.446] text-gray-chateau">
-              Участников
-            </div>
-          </div>
-          
-          <!-- $2M+ Призовых -->
-          <div class="text-center">
-            <div class="text-[18.75px] leading-[1.493] font-bold text-white mb-0">
-              $2M+
-            </div>
-            <div class="text-[11.06px] leading-[1.446] text-gray-chateau">
-              Призовых
-            </div>
-          </div>
+        <div class="text-center">
+          <div class="text-[29.297px] font-bold text-white leading-[36px]">$2M+</div>
+          <div class="text-[13.234px] text-[#99a1af] leading-[20px]">Призовых</div>
         </div>
       </div>
     </div>
@@ -121,5 +67,6 @@
 </template>
 
 <script setup>
-// MainBanner component - no additional logic needed for now
+// Hero background image from Figma
+const heroBackgroundImage = 'http://localhost:3845/assets/323eff30c7b7b5a5ba695b49b4372777ab3cc5bf.png'
 </script>
