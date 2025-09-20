@@ -123,13 +123,25 @@
   </section>
 </template>
 
-<script setup>
-const props = defineProps({
-  tournament: {
-    type: Object,
-    required: true
-  }
-})
+<script setup lang="ts">
+interface Tournament {
+  id: number
+  title: string
+  game: string
+  date: string
+  time?: string
+  prize: string
+  participants: number
+  maxParticipants: number
+  status: 'live' | 'registration' | 'upcoming' | 'completed'
+  progress: number
+  image: string
+  description: string
+}
+
+const props = defineProps<{
+  tournament: Tournament
+}>()
 
 const statusBadgeClass = computed(() => {
   switch (props.tournament.status) {

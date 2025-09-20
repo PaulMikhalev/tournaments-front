@@ -21,3 +21,7 @@
     </ul>
   </section>
 </template>
+
+<script setup lang="ts">
+// Advantages component
+</script>

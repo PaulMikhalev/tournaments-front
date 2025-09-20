@@ -21,3 +21,7 @@
     </ol>
   </section>
 </template>
+
+<script setup lang="ts">
+// How It Works component
+</script>

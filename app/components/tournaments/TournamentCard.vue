@@ -3,8 +3,8 @@
     <UCard 
       class="bg-[#1e2939] border-[#364153] hover:border-[rgba(46,221,199,0.55)] hover:shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)] transition-all duration-300 group cursor-pointer"
       :ui="{
-        base: 'rounded-[14px]',
-        body: { padding: 'p-6' }
+        root: 'rounded-[14px]',
+        body: 'p-6'
       }"
     >
       <!-- Header with Game Image and Info -->
@@ -94,13 +94,24 @@
   </NuxtLink>
 </template>
 
-<script setup>
-const props = defineProps({
-  tournament: {
-    type: Object,
-    required: true
-  }
-})
+<script setup lang="ts">
+interface Tournament {
+  id: number
+  title: string
+  game: string
+  date: string
+  prize: string
+  participants: number
+  maxParticipants: number
+  status: 'live' | 'registration' | 'upcoming' | 'completed'
+  progress: number
+  image: string
+  featured?: boolean
+}
+
+const props = defineProps<{
+  tournament: Tournament
+}>()
 
 const statusBadgeClass = computed(() => {
   switch (props.tournament.status) {

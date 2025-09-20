@@ -79,7 +79,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import TournamentCard from '~/components/tournaments/TournamentCard.vue'
 
 // Reactive variables for filtering and search
@@ -115,7 +115,7 @@ const tournaments = ref([
     prize: '$30,000',
     participants: 12,
     maxParticipants: 16,
-    status: 'live',
+    status: 'live' as const,
     progress: 75,
     image: gameImages['Soulcalibur VI']
   },
@@ -127,7 +127,7 @@ const tournaments = ref([
     prize: '$50,000',
     participants: 8,
     maxParticipants: 16,
-    status: 'registration',
+    status: 'registration' as const,
     progress: 50,
     image: gameImages['Counter-Strike 2']
   },
@@ -139,7 +139,7 @@ const tournaments = ref([
     prize: '$25,000',
     participants: 12,
     maxParticipants: 16,
-    status: 'registration',
+    status: 'registration' as const,
     progress: 75,
     image: gameImages['Dota 2'],
     featured: true
@@ -152,7 +152,7 @@ const tournaments = ref([
     prize: '$15,000',
     participants: 8,
     maxParticipants: 32,
-    status: 'registration',
+    status: 'registration' as const,
     progress: 25,
     image: gameImages['Valorant']
   },
@@ -164,7 +164,7 @@ const tournaments = ref([
     prize: '$30,000',
     participants: 5,
     maxParticipants: 8,
-    status: 'upcoming',
+    status: 'upcoming' as const,
     progress: 63,
     image: gameImages['League of Legends']
   },
@@ -176,7 +176,7 @@ const tournaments = ref([
     prize: '$5,000',
     participants: 24,
     maxParticipants: 32,
-    status: 'registration',
+    status: 'registration' as const,
     progress: 75,
     image: gameImages['Counter-Strike 2']
   },
@@ -188,7 +188,7 @@ const tournaments = ref([
     prize: '$10,000',
     participants: 6,
     maxParticipants: 16,
-    status: 'registration',
+    status: 'registration' as const,
     progress: 38,
     image: gameImages['Dota 2']
   }

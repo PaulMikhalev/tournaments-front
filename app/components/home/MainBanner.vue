@@ -80,7 +80,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Hero background image from Figma
 const heroBackgroundImage = 'http://localhost:3845/assets/323eff30c7b7b5a5ba695b49b4372777ab3cc5bf.png'
 </script>

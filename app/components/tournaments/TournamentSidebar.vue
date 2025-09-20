@@ -153,13 +153,27 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  tournament: {
-    type: Object,
-    required: true
-  }
-})
+<script setup lang="ts">
+interface Tournament {
+  id: number
+  title: string
+  game: string
+  date: string
+  prize: string
+  participants: number
+  maxParticipants: number
+  status: 'live' | 'registration' | 'upcoming' | 'completed'
+  progress: number
+  image: string
+  format?: string
+  platform?: string
+  region?: string
+  organizer?: string
+}
+
+const props = defineProps<{
+  tournament: Tournament
+}>()
 
 const progressPercentage = computed(() => {
   return Math.round((props.tournament.participants / props.tournament.maxParticipants) * 100)

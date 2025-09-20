@@ -8,3 +8,7 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+// Partners component
+</script>
