@@ -50,12 +50,15 @@
           <button class="px-4 py-2 text-[12.797px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
             Регистрация
           </button>
-          <button class="bg-[#00ffe0] text-black px-3 py-2 rounded-[8px] flex items-center gap-2 text-[13.781px] font-medium leading-[20px] hover:bg-[#00d4c4] transition-colors duration-200">
+          <NuxtLink 
+            to="/profile"
+            class="bg-[#00ffe0] text-black px-3 py-2 rounded-[8px] flex items-center gap-2 text-[13.781px] font-medium leading-[20px] hover:bg-[#00d4c4] transition-colors duration-200"
+          >
             <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM4 12a4 4 0 118 0v2H4v-2z"/>
             </svg>
             Профиль
-          </button>
+          </NuxtLink>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -147,7 +150,8 @@
             >
               Регистрация
             </button>
-            <button 
+            <NuxtLink 
+              to="/profile"
               class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-cyan-400 rounded-lg hover:bg-cyan-500 transition-colors duration-200 font-medium text-black"
               @click="closeMobileMenu"
             >
@@ -156,7 +160,7 @@
                 <path d="M5.33 2H10.67V7.33H5.33V2Z" stroke="#000000" stroke-width="1.33"/>
               </svg>
               Профиль
-            </button>
+            </NuxtLink>
           </div>
         </div>
       </nav>
