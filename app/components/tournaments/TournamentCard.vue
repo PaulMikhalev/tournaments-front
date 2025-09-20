@@ -1,11 +1,7 @@
 <template>
   <NuxtLink :to="`/tournaments/${tournament.id}`" class="block">
     <div 
-      class="bg-[#1e2939] border border-[#364153] rounded-[14px] p-6 cursor-pointer transition-all duration-300 group"
-      :class="{ 
-        'border-[rgba(46,221,199,0.55)] shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)]': isFeatured,
-        'hover:border-[rgba(46,221,199,0.55)] hover:shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)]': !isFeatured 
-      }"
+      class="bg-[#1e2939] border border-[#364153] rounded-[14px] p-6 cursor-pointer transition-all duration-300 group hover:border-[rgba(46,221,199,0.55)] hover:shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)]"
     >
       <!-- Header with Game Image and Info -->
       <div class="flex justify-between items-start mb-4">
@@ -21,11 +17,7 @@
           
           <!-- Tournament Info -->
           <div>
-            <h3 class="text-[15px] leading-[24px] font-semibold transition-colors duration-300" 
-                :class="{ 
-                  'text-[#00ffe0]': isFeatured,
-                  'text-white group-hover:text-[#00ffe0]': !isFeatured 
-                }">
+            <h3 class="text-[15px] leading-[24px] font-semibold transition-colors duration-300 text-white group-hover:text-[#00ffe0]">
               {{ tournament.title }}
             </h3>
             <p class="text-[13.125px] leading-[20px] text-[#99a1af]">
@@ -103,10 +95,6 @@ const props = defineProps({
   tournament: {
     type: Object,
     required: true
-  },
-  isFeatured: {
-    type: Boolean,
-    default: false
   }
 })
 

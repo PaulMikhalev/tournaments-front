@@ -66,7 +66,6 @@
           v-for="(tournament, index) in filteredTournaments" 
           :key="tournament.id"
           :tournament="tournament"
-          :is-featured="index === 2"
         />
       </div>
 
