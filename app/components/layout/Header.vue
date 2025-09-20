@@ -25,7 +25,7 @@
         <!-- User Actions -->
         <div class="flex items-center space-x-4">
           <UButton 
-            to="/create-tournament"
+            to="/tournaments/create"
             variant="ghost" 
             size="sm"
             class="text-[#d1d5dc] hover:text-white"
@@ -129,7 +129,7 @@
         <div class="pt-4 border-t border-mirage space-y-3">
           <div class="grid grid-cols-2 gap-2">
             <UButton 
-              to="/create-tournament"
+              to="/tournaments/create"
               variant="ghost"
               size="sm"
               block
