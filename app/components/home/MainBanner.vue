@@ -32,7 +32,7 @@
       <!-- Action Buttons -->
       <div class="flex gap-4 justify-center mb-[40.7px]">
         <UButton 
-          to="/create-tournament"
+          to="/tournaments/create"
           color="primary"
           size="lg"
           class="bg-[#00ffe0] hover:bg-[#00d4c4] text-black font-semibold"
