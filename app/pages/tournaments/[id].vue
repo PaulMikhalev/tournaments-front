@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-home-gradient">
+  <div class="min-h-screen bg-[#101828]">
     <!-- Tournament Header -->
     <TournamentHeader :tournament="tournament" />
     
@@ -9,11 +9,6 @@
       <template #default="{ activeTab }">
         <TournamentOverview :tournament="tournament" :activeTab="activeTab" />
       </template>
-      
-      <!-- Sidebar -->
-      <template #sidebar>
-        <TournamentSidebar :tournament="tournament" />
-      </template>
     </TournamentTabs>
   </div>
 </template>
@@ -22,7 +17,6 @@
 import TournamentHeader from '~/components/tournaments/TournamentHeader.vue'
 import TournamentTabs from '~/components/tournaments/TournamentTabs.vue'
 import TournamentOverview from '~/components/tournaments/TournamentOverview.vue'
-import TournamentSidebar from '~/components/tournaments/TournamentSidebar.vue'
 
 // Get tournament ID from route
 const route = useRoute()
@@ -31,17 +25,18 @@ const tournamentId = route.params.id
 // Mock tournament data - в реальном проекте будет загружаться с API
 const tournament = ref({
   id: tournamentId,
-  title: 'Soulcalibur VI Championship',
-  game: 'Soulcalibur VI',
-  date: '15 января, 19:00',
-  prize: '$30,000',
-  participants: 12,
+  title: 'Winter Championship 2025',
+  game: 'Counter-Strike 2',
+  date: '15 января',
+  time: '19:00 MSK',
+  prize: '$50,000',
+  participants: 16,
   maxParticipants: 16,
-  status: 'registration',
-  progress: 75,
-  image: '/game-soulcalibur.png',
-  description: 'Присоединяйтесь к захватывающему турниру Soulcalibur VI и сразитесь с лучшими игроками за призовой фонд $30,000. Турнир проводится в формате одиночной элиминации, где каждая игра может стать решающей.',
-  format: 'Одиночная элиминация',
+  status: 'live',
+  progress: 100,
+  image: '/game-cs2.png',
+  description: 'Крупнейший зимний турнир по Counter-Strike 2 с участием лучших команд мира. Призовой фонд $50,000 будет разделен между победителями в формате single elimination. Все матчи проходят в формате BO3, финал - BO5.',
+  format: 'Single Elimination',
   platform: 'PC',
   region: 'Европа',
   organizer: 'CyberTournaments'

@@ -1,5 +1,9 @@
 <template>
   <div>
-    <h1>Список турниров</h1>
+    <TournamentsList />
   </div>
 </template>
+
+<script setup>
+import TournamentsList from '~/components/home/TournamentsList.vue'
+</script>
