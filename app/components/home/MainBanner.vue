@@ -31,23 +31,34 @@
       
       <!-- Action Buttons -->
       <div class="flex gap-4 justify-center mb-[40.7px]">
-        <NuxtLink 
+        <UButton 
           to="/create-tournament"
-          class="bg-[#00ffe0] text-black px-4 py-2 rounded-[8px] flex items-center gap-2 font-semibold text-[16.453px] leading-[28px] hover:bg-[#00d4c4] transition-colors duration-200"
+          color="primary"
+          size="lg"
+          class="bg-[#00ffe0] hover:bg-[#00d4c4] text-black font-semibold"
         >
-          <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1.33" fill="none"/>
-            <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1.33" fill="none"/>
-          </svg>
+          <template #leading>
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1.33" fill="none"/>
+              <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1.33" fill="none"/>
+            </svg>
+          </template>
           Создать турнир
-        </NuxtLink>
-        <button class="bg-[rgba(38,38,38,0.3)] text-[#00ffe0] px-4 py-2 rounded-[8px] border border-neutral-800 flex items-center gap-2 font-semibold text-[16.734px] leading-[28px] hover:bg-[rgba(38,38,38,0.5)] transition-colors duration-200">
-          <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.33"/>
-            <path d="m14 14-6-6" stroke="currentColor" stroke-width="1.33"/>
-          </svg>
+        </UButton>
+        <UButton 
+          to="/tournaments"
+          variant="outline"
+          size="lg"
+          class="bg-[rgba(38,38,38,0.3)] text-[#00ffe0] border-neutral-800 hover:bg-[rgba(38,38,38,0.5)] font-semibold"
+        >
+          <template #leading>
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.33"/>
+              <path d="m14 14-6-6" stroke="currentColor" stroke-width="1.33"/>
+            </svg>
+          </template>
           Искать турниры
-        </button>
+        </UButton>
       </div>
       
       <!-- Statistics -->

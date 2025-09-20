@@ -46,11 +46,11 @@
                 <label class="block text-[14px] leading-[14px] text-[#d1d5dc] mb-[14px]">
                   Название турнира *
                 </label>
-                <input 
+                <UInput
                   v-model="form.name"
-                  type="text" 
                   placeholder="Введите название турнира"
-                  class="w-full h-[36px] px-[13px] bg-[#101828] border border-[#374151] rounded text-[16px] leading-[19px] text-white placeholder:text-[#99a1af] focus:border-[#00ffe0] focus:outline-none"
+                  size="lg"
+                  class="bg-[#101828] border-[#374151] h-[36px]"
                 />
               </div>
 
@@ -59,12 +59,13 @@
                 <label class="block text-[14px] leading-[14px] text-[#d1d5dc] mb-[14px]">
                   Описание
                 </label>
-                <textarea 
+                <UTextarea 
                   v-model="form.description"
-                  rows="4"
                   placeholder="Опишите ваш турнир..."
-                  class="w-full px-[13px] py-[9px] bg-[#101828] border border-[#374151] rounded text-[20px] leading-[20px] text-white placeholder:text-[#99a1af] focus:border-[#00ffe0] focus:outline-none resize-none"
-                ></textarea>
+                  :rows="4"
+                  class="bg-[#101828] border-[#374151]"
+                  resize="none"
+                />
               </div>
 
               <!-- Game and Prize -->
@@ -73,27 +74,23 @@
                   <label class="block text-[14px] leading-[14px] text-[#d1d5dc] mb-[14px]">
                     Игра *
                   </label>
-                  <select 
+                  <USelect 
                     v-model="form.game"
-                    class="w-full h-[36px] px-[13px] bg-[#101828] border border-[#374151] rounded text-[20px] leading-[20px] text-white focus:border-[#00ffe0] focus:outline-none appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22%2399a1af%22%20d%3D%22M4.427%206.573L8%2010.146l3.573-3.573a.5.5%200%20011.414.707L8.707%2011.56a.5.5%200%2001-.707%200L3.72%207.28a.5.5%200%2001.707-.707z%22/%3E%3C/svg%3E')] bg-no-repeat bg-[length:16px] bg-[right_13px_center]"
-                  >
-                    <option value="">Выберите игру</option>
-                    <option value="Counter-Strike 2">Counter-Strike 2</option>
-                    <option value="Dota 2">Dota 2</option>
-                    <option value="Valorant">Valorant</option>
-                    <option value="League of Legends">League of Legends</option>
-                    <option value="Soulcalibur VI">Soulcalibur VI</option>
-                  </select>
+                    :options="gameOptions"
+                    placeholder="Выберите игру"
+                    size="lg"
+                    class="bg-[#101828] border-[#374151] h-[36px]"
+                  />
                 </div>
                 <div>
                   <label class="block text-[14px] leading-[14px] text-[#d1d5dc] mb-[14px]">
                     Призовой фонд
                   </label>
-                  <input 
+                  <UInput 
                     v-model="form.prize"
-                    type="text" 
                     placeholder="$0"
-                    class="w-full h-[36px] px-[13px] bg-[#101828] border border-[#374151] rounded text-[15px] leading-[15px] text-white placeholder:text-[#99a1af] focus:border-[#00ffe0] focus:outline-none"
+                    size="lg"
+                    class="bg-[#101828] border-[#374151] h-[36px]"
                   />
                 </div>
               </div>
@@ -296,18 +293,26 @@
 
           <!-- Action Buttons -->
           <div class="space-y-3">
-            <button 
+            <UButton 
               @click="createTournament"
-              class="w-full h-[36px] bg-[#00ffe0] hover:bg-[#00e6cc] text-[#101828] rounded font-medium transition-colors"
+              color="primary"
+              variant="solid"
+              size="lg"
+              block
+              class="bg-[#00ffe0] hover:bg-[#00e6cc] text-[#101828] font-medium"
             >
               Создать турнир
-            </button>
-            <button 
+            </UButton>
+            <UButton 
               @click="cancel"
-              class="w-full h-[36px] bg-[#374151] hover:bg-[#4b5563] text-white rounded transition-colors"
+              color="gray"
+              variant="solid"
+              size="lg"
+              block
+              class="bg-[#374151] hover:bg-[#4b5563] text-white"
             >
               Отменить
-            </button>
+            </UButton>
           </div>
         </div>
       </div>
@@ -316,6 +321,15 @@
 </template>
 
 <script setup>
+// Game options for select
+const gameOptions = [
+  { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
+  { label: 'Dota 2', value: 'Dota 2' },
+  { label: 'Valorant', value: 'Valorant' },
+  { label: 'League of Legends', value: 'League of Legends' },
+  { label: 'Soulcalibur VI', value: 'Soulcalibur VI' }
+]
+
 // Form data
 const form = ref({
   name: '',
@@ -335,12 +349,25 @@ const form = ref({
 const createTournament = () => {
   // Validate form
   if (!form.value.name || !form.value.game || !form.value.startDate || !form.value.startTime) {
-    alert('Пожалуйста, заполните все обязательные поля')
+    const toast = useToast()
+    toast.add({
+      title: 'Ошибка валидации',
+      description: 'Пожалуйста, заполните все обязательные поля',
+      color: 'red'
+    })
     return
   }
 
   // Create tournament logic here
   console.log('Creating tournament:', form.value)
+  
+  // Show success notification
+  const toast = useToast()
+  toast.add({
+    title: 'Турнир создан!',
+    description: `Турнир "${form.value.name}" успешно создан`,
+    color: 'green'
+  })
   
   // Redirect to tournaments list
   navigateTo('/')

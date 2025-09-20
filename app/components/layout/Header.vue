@@ -27,38 +27,61 @@
         
         <!-- User Actions -->
         <div class="flex items-center space-x-4">
-          <NuxtLink 
+          <UButton 
             to="/create-tournament"
-            class="flex items-center gap-2 px-3 py-2 text-[12.688px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200"
+            variant="ghost" 
+            size="sm"
+            class="text-[#d1d5dc] hover:text-white"
           >
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1" fill="none"/>
-              <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1" fill="none"/>
-            </svg>
+            <template #leading>
+              <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1" fill="none"/>
+                <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1" fill="none"/>
+              </svg>
+            </template>
             Создать
-          </NuxtLink>
-          <button class="flex items-center gap-2 px-3 py-2 text-[13.344px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1"/>
-              <path d="M8 3v2M8 11v2M3 8h2M11 8h2" stroke="currentColor" stroke-width="1"/>
-            </svg>
-            Управление
-          </button>
-          <button class="px-4 py-2 text-[13.453px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
-            Войти
-          </button>
-          <button class="px-4 py-2 text-[12.797px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
-            Регистрация
-          </button>
-          <NuxtLink 
-            to="/profile"
-            class="bg-[#00ffe0] text-black px-3 py-2 rounded-[8px] flex items-center gap-2 text-[13.781px] font-medium leading-[20px] hover:bg-[#00d4c4] transition-colors duration-200"
+          </UButton>
+          <UButton 
+            variant="ghost" 
+            size="sm"
+            class="text-[#d1d5dc] hover:text-white"
           >
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM4 12a4 4 0 118 0v2H4v-2z"/>
-            </svg>
+            <template #leading>
+              <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1"/>
+                <path d="M8 3v2M8 11v2M3 8h2M11 8h2" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </template>
+            Управление
+          </UButton>
+          <UButton 
+            variant="ghost" 
+            size="sm"
+            class="text-[#d1d5dc] hover:text-white"
+          >
+            Войти
+          </UButton>
+          <UButton 
+            variant="ghost" 
+            size="sm"
+            class="text-[#d1d5dc] hover:text-white"
+          >
+            Регистрация
+          </UButton>
+          <UButton 
+            to="/profile"
+            color="primary"
+            variant="solid"
+            size="sm"
+            class="bg-[#00ffe0] hover:bg-[#00d4c4] text-black"
+          >
+            <template #leading>
+              <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 2a3 3 0 100 6 3 3 0 000-6zM4 12a4 4 0 118 0v2H4v-2z"/>
+              </svg>
+            </template>
             Профиль
-          </NuxtLink>
+          </UButton>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -113,54 +136,72 @@
         
         <div class="pt-4 border-t border-mirage space-y-3">
           <div class="grid grid-cols-2 gap-2">
-            <NuxtLink 
+            <UButton 
               to="/create-tournament"
-              class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-mirage/50 transition-colors duration-200"
+              variant="ghost"
+              size="sm"
+              block
               @click="closeMobileMenu"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.33 8H12.67" stroke="#D1D5DC" stroke-width="1.33"/>
-                <path d="M8 3.33V12.67" stroke="#D1D5DC" stroke-width="1.33"/>
-              </svg>
-              <span class="text-mischka font-medium text-sm">Создать</span>
-            </NuxtLink>
+              <template #leading>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.33 8H12.67" stroke="#D1D5DC" stroke-width="1.33"/>
+                  <path d="M8 3.33V12.67" stroke="#D1D5DC" stroke-width="1.33"/>
+                </svg>
+              </template>
+              Создать
+            </UButton>
             
-            <button 
-              class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-mirage/50 transition-colors duration-200"
+            <UButton 
+              variant="ghost"
+              size="sm"
+              block
               @click="closeMobileMenu"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.03 1.34H13.97V14.65H2.03V1.34Z" stroke="#D1D5DC" stroke-width="1.33"/>
-                <path d="M6 6H10V10H6V6Z" stroke="#D1D5DC" stroke-width="1.33"/>
-              </svg>
-              <span class="text-mischka font-medium text-sm">Управление</span>
-            </button>
+              <template #leading>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.03 1.34H13.97V14.65H2.03V1.34Z" stroke="#D1D5DC" stroke-width="1.33"/>
+                  <path d="M6 6H10V10H6V6Z" stroke="#D1D5DC" stroke-width="1.33"/>
+                </svg>
+              </template>
+              Управление
+            </UButton>
           </div>
           
           <div class="space-y-2">
-            <button 
-              class="w-full text-sm px-4 py-2.5 rounded-lg hover:bg-mirage/50 transition-colors duration-200 font-medium text-mischka"
+            <UButton 
+              variant="ghost"
+              size="sm"
+              block
               @click="closeMobileMenu"
             >
               Войти
-            </button>
-            <button 
-              class="w-full text-sm px-4 py-2.5 rounded-lg hover:bg-mirage/50 transition-colors duration-200 font-medium text-mischka"
+            </UButton>
+            <UButton 
+              variant="ghost"
+              size="sm"
+              block
               @click="closeMobileMenu"
             >
               Регистрация
-            </button>
-            <NuxtLink 
+            </UButton>
+            <UButton 
               to="/profile"
-              class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-cyan-400 rounded-lg hover:bg-cyan-500 transition-colors duration-200 font-medium text-black"
+              color="primary"
+              variant="solid"
+              size="sm"
+              block
+              class="bg-cyan-400 hover:bg-cyan-500 text-black"
               @click="closeMobileMenu"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.33 10H12.67V14H3.33V10Z" stroke="#000000" stroke-width="1.33"/>
-                <path d="M5.33 2H10.67V7.33H5.33V2Z" stroke="#000000" stroke-width="1.33"/>
-              </svg>
+              <template #leading>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.33 10H12.67V14H3.33V10Z" stroke="#000000" stroke-width="1.33"/>
+                  <path d="M5.33 2H10.67V7.33H5.33V2Z" stroke="#000000" stroke-width="1.33"/>
+                </svg>
+              </template>
               Профиль
-            </NuxtLink>
+            </UButton>
           </div>
         </div>
       </nav>

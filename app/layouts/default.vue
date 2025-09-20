@@ -3,6 +3,9 @@
     <Header />
     <NuxtPage class="mt-[69px]" />
     <Footer />
+    
+    <!-- Nuxt UI Notifications -->
+    <UNotifications />
   </div>
 </template>
 

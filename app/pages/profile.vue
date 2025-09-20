@@ -124,12 +124,19 @@
               </div>
 
               <!-- Edit Profile Button -->
-              <button class="bg-[#00ffe0] hover:bg-[#00e6cc] text-[#101828] px-4 py-2 rounded flex items-center gap-2 font-medium text-[20px] leading-[20px] transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11.333 2A1.333 1.333 0 0 0 9.726 2.391L2.667 9.45v2.883h2.883l7.059-7.059a1.333 1.333 0 0 0 0-1.885l-1.276-1.276Z" fill="currentColor"/>
-                </svg>
+              <UButton 
+                color="primary"
+                variant="solid"
+                size="lg"
+                class="bg-[#00ffe0] hover:bg-[#00e6cc] text-[#101828] font-medium"
+              >
+                <template #leading>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.333 2A1.333 1.333 0 0 0 9.726 2.391L2.667 9.45v2.883h2.883l7.059-7.059a1.333 1.333 0 0 0 0-1.885l-1.276-1.276Z" fill="currentColor"/>
+                  </svg>
+                </template>
                 Редактировать профиль
-              </button>
+              </UButton>
             </div>
           </div>
         </div>
@@ -145,12 +152,14 @@
       <!-- Tabs Section -->
       <div class="space-y-8">
         <!-- Tab Navigation -->
-        <div class="flex">
-          <button
+        <div class="flex gap-2">
+          <UButton
             v-for="tab in tabs"
             :key="tab.id"
             @click="activeTab = tab.id"
-            class="px-4 py-2 text-[20px] leading-[20px] font-medium transition-all duration-200 rounded"
+            :variant="activeTab === tab.id ? 'solid' : 'ghost'"
+            :color="activeTab === tab.id ? 'primary' : 'gray'"
+            size="lg"
             :class="[
               activeTab === tab.id
                 ? 'bg-[#00ffe0] text-[#101828]'
@@ -158,7 +167,7 @@
             ]"
           >
             {{ tab.label }}
-          </button>
+          </UButton>
         </div>
 
         <!-- Tab Content -->

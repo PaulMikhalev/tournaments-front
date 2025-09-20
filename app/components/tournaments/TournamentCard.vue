@@ -1,7 +1,11 @@
 <template>
   <NuxtLink :to="`/tournaments/${tournament.id}`" class="block">
-    <div 
-      class="bg-[#1e2939] border border-[#364153] rounded-[14px] p-6 cursor-pointer transition-all duration-300 group hover:border-[rgba(46,221,199,0.55)] hover:shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)]"
+    <UCard 
+      class="bg-[#1e2939] border-[#364153] hover:border-[rgba(46,221,199,0.55)] hover:shadow-[0px_9.086px_13.629px_-2.726px_rgba(0,255,224,0.09),0px_3.634px_5.452px_-3.634px_rgba(0,255,224,0.09)] transition-all duration-300 group cursor-pointer"
+      :ui="{
+        base: 'rounded-[14px]',
+        body: { padding: 'p-6' }
+      }"
     >
       <!-- Header with Game Image and Info -->
       <div class="flex justify-between items-start mb-4">
@@ -86,7 +90,7 @@
           />
         </div>
       </div>
-    </div>
+    </UCard>
   </NuxtLink>
 </template>
 
