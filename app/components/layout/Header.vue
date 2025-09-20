@@ -27,13 +27,16 @@
         
         <!-- User Actions -->
         <div class="flex items-center space-x-4">
-          <button class="flex items-center gap-2 px-3 py-2 text-[12.688px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
+          <NuxtLink 
+            to="/create-tournament"
+            class="flex items-center gap-2 px-3 py-2 text-[12.688px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200"
+          >
             <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
               <path d="M8 0.5v7h7" stroke="currentColor" stroke-width="1" fill="none"/>
               <path d="M8 7.5h-7v7" stroke="currentColor" stroke-width="1" fill="none"/>
             </svg>
             Создать
-          </button>
+          </NuxtLink>
           <button class="flex items-center gap-2 px-3 py-2 text-[13.344px] font-medium text-[#d1d5dc] leading-[20px] hover:text-white transition-colors duration-200">
             <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
               <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1"/>
@@ -107,7 +110,8 @@
         
         <div class="pt-4 border-t border-mirage space-y-3">
           <div class="grid grid-cols-2 gap-2">
-            <button 
+            <NuxtLink 
+              to="/create-tournament"
               class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-mirage/50 transition-colors duration-200"
               @click="closeMobileMenu"
             >
@@ -116,7 +120,7 @@
                 <path d="M8 3.33V12.67" stroke="#D1D5DC" stroke-width="1.33"/>
               </svg>
               <span class="text-mischka font-medium text-sm">Создать</span>
-            </button>
+            </NuxtLink>
             
             <button 
               class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-mirage/50 transition-colors duration-200"
