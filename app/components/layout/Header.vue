@@ -125,13 +125,6 @@
         >
           Турниры
         </NuxtLink>
-        <NuxtLink 
-          to="/results" 
-          class="block text-mischka hover:text-white transition-colors duration-200 font-normal py-2"
-          @click="closeMobileMenu"
-        >
-          Результаты
-        </NuxtLink>
         
         <div class="pt-4 border-t border-mirage space-y-3">
           <div class="grid grid-cols-2 gap-2">
