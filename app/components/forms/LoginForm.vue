@@ -68,7 +68,7 @@
     <div class="grid grid-cols-2 gap-3">
       <UButton
         variant="outline"
-        color="white"
+        color="neutral"
         class="w-full border-border hover:bg-white/10"
         @click="loginWithGoogle"
       >
@@ -77,7 +77,7 @@
       </UButton>
       <UButton
         variant="outline"
-        color="white"
+        color="neutral"
         class="w-full border-border hover:bg-white/10"
         @click="loginWithDiscord"
       >

@@ -36,7 +36,7 @@ const handleLoginError = (error: string) => {
   toast.add({
     title: 'Ошибка входа',
     description: error,
-    color: 'red'
+    color: 'error'
   })
 }
 </script>

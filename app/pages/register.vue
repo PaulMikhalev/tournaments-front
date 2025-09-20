@@ -36,7 +36,7 @@ const handleRegisterError = (error: string) => {
   toast.add({
     title: 'Ошибка регистрации',
     description: error,
-    color: 'red'
+    color: 'error'
   })
 }
 </script>
