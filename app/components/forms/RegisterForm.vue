@@ -139,6 +139,17 @@
         Discord
       </UButton>
     </div>
+
+    <!-- Ссылка на логин -->
+    <div class="text-center">
+      <span class="text-text-secondary">Уже есть аккаунт? </span>
+      <NuxtLink 
+        to="/login" 
+        class="text-primary hover:text-primary/80 transition-colors font-medium"
+      >
+        Войти
+      </NuxtLink>
+    </div>
   </form>
 </template>
 

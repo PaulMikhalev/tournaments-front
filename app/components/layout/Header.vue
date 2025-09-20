@@ -20,9 +20,6 @@
           <NuxtLink to="/tournaments" class="text-[15.125px] text-[#d1d5dc] leading-[24px] hover:text-white transition-colors duration-200">
             Турниры
           </NuxtLink>
-          <NuxtLink to="/results" class="text-[14.5px] text-[#d1d5dc] leading-[24px] hover:text-white transition-colors duration-200">
-            Результаты
-          </NuxtLink>
         </nav>
         
         <!-- User Actions -->
@@ -55,6 +52,7 @@
             Управление
           </UButton>
           <UButton 
+            to="/login"
             variant="ghost" 
             size="sm"
             class="text-[#d1d5dc] hover:text-white"
@@ -62,6 +60,7 @@
             Войти
           </UButton>
           <UButton 
+            to="/register"
             variant="ghost" 
             size="sm"
             class="text-[#d1d5dc] hover:text-white"
@@ -170,6 +169,7 @@
           
           <div class="space-y-2">
             <UButton 
+              to="/login"
               variant="ghost"
               size="sm"
               block
@@ -178,6 +178,7 @@
               Войти
             </UButton>
             <UButton 
+              to="/register"
               variant="ghost"
               size="sm"
               block

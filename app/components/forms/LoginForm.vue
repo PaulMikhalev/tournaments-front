@@ -88,6 +88,17 @@
         Discord
       </UButton>
     </div>
+
+    <!-- Ссылка на регистрацию -->
+    <div class="text-center">
+      <span class="text-text-secondary">Нет аккаунта? </span>
+      <NuxtLink 
+        to="/register" 
+        class="text-primary hover:text-primary/80 transition-colors font-medium"
+      >
+        Зарегистрироваться
+      </NuxtLink>
+    </div>
   </form>
 </template>
 
