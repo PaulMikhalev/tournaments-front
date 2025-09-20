@@ -9,17 +9,7 @@
 
       <!-- Форма регистрации -->
       <div class="bg-surface rounded-2xl p-8 shadow-2xl">
-        <RegisterForm @success="handleRegisterSuccess" @error="handleRegisterError" />
-        
-        <!-- Ссылка на логин -->
-        <div class="mt-6 text-center">
-          <p class="text-text-secondary">
-            Уже есть аккаунт? 
-            <NuxtLink to="/login" class="text-primary hover:text-primary/80 font-medium transition-colors">
-              Войти
-            </NuxtLink>
-          </p>
-        </div>
+        <FormsRegisterForm @success="handleRegisterSuccess" @error="handleRegisterError" />
       </div>
     </div>
   </div>

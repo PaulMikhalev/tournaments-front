@@ -62,7 +62,7 @@ app/
 - **Кнопки**: UButton с кастомными стилями
 - **Формы**: UInput, USelect, UTextarea
 - **Карточки**: UCard с hover-эффектами
-- **Уведомления**: UNotifications с toast-сообщениями
+- **Уведомления**: useToast composable с toast-сообщениями через UApp
 
 ## 📱 Страницы и маршруты
 
