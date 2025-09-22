@@ -263,27 +263,21 @@ const handleSubmit = async () => {
   isLoading.value = true
   
   try {
-    // Здесь будет API вызов для регистрации
-    // const response = await $fetch('/api/auth/register', {
-    //   method: 'POST',
-    //   body: {
-    //     username: form.username,
-    //     email: form.email,
-    //     password: form.password,
-    //     team: form.team
-    //   }
-    // })
-
-    // Имитация API вызова
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    console.log('submit', form)
+    const { $api } = useNuxtApp()
     
-    // Успешная регистрация
-    emit('success', {
-      id: '1',
-      username: form.username,
-      email: form.email,
-      team: form.team
+    const response = await $api('/auth/register', {
+      method: 'POST',
+      body: {
+        username: form.username,
+        email: form.email,
+        password: form.password
+      }
     })
+    if (response && (response as any).token) {
+      localStorage.setItem('access_token', (response as any).token)
+    }
+    emit('success', (response as any).user || { username: form.username, email: form.email })
     
   } catch (error: any) {
     emit('error', error.message || 'Ошибка при регистрации')

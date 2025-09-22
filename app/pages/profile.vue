@@ -263,7 +263,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Page meta
 definePageMeta({
   title: 'Профиль'

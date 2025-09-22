@@ -40,6 +40,7 @@ app/
 │   └── tournaments/     # Страницы турниров
 ├── assets/              # Статические ресурсы
 └── public/              # Публичные файлы
+plugins/                 # Плагины Nuxt (например, api.ts)
 ```
 
 ## 🎨 Дизайн-система
@@ -102,7 +103,7 @@ app/
 - **TournamentOverview** - контент активной вкладки
 - **TournamentBracket** - турнирная сетка
 
-#### Создание турнира (`/create-tournament`)
+#### Создание турнира (`/tournaments/create`)
 - Форма с разделами:
   - Основная информация (название, описание, игра)
   - Расписание (дата, время)
@@ -225,8 +226,8 @@ interface User {
 - ✅ Валидация форм аутентификации
 
 ### В разработке:
-- 🔄 Интеграция с бэкенд API
-- 🔄 Система аутентификации
+- 🔄 Расширение интеграции с бэкенд API
+- 🔄 Улучшение UX аутентификации
 - 🔄 Регистрация на турниры
 - 🔄 Управление турнирами
 
@@ -238,5 +239,24 @@ interface User {
 
 ---
 
-*Документация обновлена: 2025-01-27*
+## 🔌 Интеграция с API
+
+- Базовый URL API: хранится в `runtimeConfig.public.apiBase` (по умолчанию `http://localhost:3001`).
+- Плагин `app/plugins/api.ts` предоставляет `$api` на базе `$fetch`:
+  - Автоматически подставляет `baseURL` и `Content-Type: application/json`.
+  - Вставляет `Authorization: Bearer <token>` из `localStorage.access_token`.
+  - Включает `credentials: 'include'` для работы с cookie при необходимости.
+
+### Аутентификация
+- Эндпоинты: `/auth/register`, `/auth/login`, `/auth/me`, `/auth/logout`.
+- После успешного `login/register` токен сохраняется в `localStorage.access_token`.
+
+### Турниры
+- Список: `GET /tournaments`
+- Детали: `GET /tournaments/:id`
+- Создание: `POST /tournaments`
+
+Пример использования в компонентах доступен в `LoginForm.vue`, `RegisterForm.vue`, `TournamentsList.vue`, `pages/tournaments/[id].vue`, `pages/tournaments/create.vue`.
+
+*Документация обновлена: 2025-09-22*
 *Версия проекта: 1.0.0*

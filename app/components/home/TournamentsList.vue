@@ -105,94 +105,29 @@ const gameImages = {
   'League of Legends': 'http://localhost:3845/assets/860dc6bc2b9ea67637fbb0b3b403e100cabd221b.png'
 }
 
-// Mock tournament data - в реальном проекте будет загружаться с API
-const tournaments = ref([
-  {
-    id: 1,
-    title: 'Soulcalibur VI Championship',
-    game: 'Soulcalibur VI',
-    date: '15 января, 19:00',
-    prize: '$30,000',
-    participants: 12,
-    maxParticipants: 16,
-    status: 'live' as const,
-    progress: 75,
-    image: gameImages['Soulcalibur VI']
-  },
-  {
-    id: 2,
-    title: 'Winter CS Championship',
-    game: 'Counter-Strike 2',
-    date: '20 января, 20:00',
-    prize: '$50,000',
-    participants: 8,
-    maxParticipants: 16,
-    status: 'registration' as const,
-    progress: 50,
-    image: gameImages['Counter-Strike 2']
-  },
-  {
-    id: 3,
-    title: 'Dota Masters League',
-    game: 'Dota 2',
-    date: '18 января, 18:00',
-    prize: '$25,000',
-    participants: 12,
-    maxParticipants: 16,
-    status: 'registration' as const,
-    progress: 75,
-    image: gameImages['Dota 2'],
-    featured: true
-  },
-  {
-    id: 4,
-    title: 'Valorant Pro Series',
-    game: 'Valorant',
-    date: '22 января, 20:00',
-    prize: '$15,000',
-    participants: 8,
-    maxParticipants: 32,
-    status: 'registration' as const,
-    progress: 25,
-    image: gameImages['Valorant']
-  },
-  {
-    id: 5,
-    title: 'LoL European Cup',
-    game: 'League of Legends',
-    date: '25 января, 17:00',
-    prize: '$30,000',
-    participants: 5,
-    maxParticipants: 8,
-    status: 'upcoming' as const,
-    progress: 63,
-    image: gameImages['League of Legends']
-  },
-  {
-    id: 6,
-    title: 'CS2 Weekly Tournament',
-    game: 'Counter-Strike 2',
-    date: '16 января, 21:00',
-    prize: '$5,000',
-    participants: 24,
-    maxParticipants: 32,
-    status: 'registration' as const,
-    progress: 75,
-    image: gameImages['Counter-Strike 2']
-  },
-  {
-    id: 7,
-    title: 'Dota 2 Battle Royale',
-    game: 'Dota 2',
-    date: '20 января, 19:30',
-    prize: '$10,000',
-    participants: 6,
-    maxParticipants: 16,
-    status: 'registration' as const,
-    progress: 38,
-    image: gameImages['Dota 2']
+const tournaments = ref<any[]>([])
+
+onMounted(async () => {
+  try {
+    const { $api } = useNuxtApp()
+    const data = await $api('/tournaments', { method: 'GET' })
+    // Ожидаем массив турниров с полями, маппим при необходимости
+    tournaments.value = Array.isArray(data) ? data.map((t: any) => ({
+      id: t.id,
+      title: t.title,
+      game: t.game,
+      date: t.startDate ? new Date(t.startDate).toLocaleDateString('ru-RU') : '',
+      prize: t.prizePool ? `$${t.prizePool}` : '',
+      participants: t.participantsCount ?? 0,
+      maxParticipants: t.maxParticipants ?? 16,
+      status: t.status ?? 'registration',
+      progress: 0,
+      image: gameImages[t.game] || gameImages['Counter-Strike 2']
+    })) : []
+  } catch (e) {
+    console.error('Failed to load tournaments', e)
   }
-])
+})
 
 // Computed property for filtered tournaments
 const filteredTournaments = computed(() => {

@@ -167,25 +167,18 @@ const handleSubmit = async () => {
   isLoading.value = true
   
   try {
-    // Здесь будет API вызов для входа
-    // const response = await $fetch('/api/auth/login', {
-    //   method: 'POST',
-    //   body: {
-    //     email: form.email,
-    //     password: form.password,
-    //     rememberMe: form.rememberMe
-    //   }
-    // })
-
-    // Имитация API вызова
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // Успешный вход
-    emit('success', {
-      id: '1',
-      email: form.email,
-      username: 'User'
+    const { $api } = useNuxtApp()
+    const response = await $api('/auth/login', {
+      method: 'POST',
+      body: {
+        email: form.email,
+        password: form.password
+      }
     })
+    if (response && (response as any).token) {
+      localStorage.setItem('access_token', (response as any).token)
+    }
+    emit('success', (response as any).user || { email: form.email })
     
   } catch (error: any) {
     emit('error', error.message || 'Ошибка при входе в систему')

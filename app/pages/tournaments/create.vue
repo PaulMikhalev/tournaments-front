@@ -305,7 +305,7 @@
             </UButton>
             <UButton 
               @click="cancel"
-              color="gray"
+              color="neutral"
               variant="solid"
               size="lg"
               block
@@ -320,7 +320,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Game options for select
 const gameOptions = [
   { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
@@ -346,31 +346,54 @@ const form = ref({
 })
 
 // Actions
-const createTournament = () => {
+const createTournament = async () => {
   // Validate form
   if (!form.value.name || !form.value.game || !form.value.startDate || !form.value.startTime) {
     const toast = useToast()
     toast.add({
       title: 'Ошибка валидации',
       description: 'Пожалуйста, заполните все обязательные поля',
-      color: 'red'
+      color: 'error'
     })
     return
   }
 
-  // Create tournament logic here
-  console.log('Creating tournament:', form.value)
-  
-  // Show success notification
-  const toast = useToast()
-  toast.add({
-    title: 'Турнир создан!',
-    description: `Турнир "${form.value.name}" успешно создан`,
-    color: 'green'
-  })
-  
-  // Redirect to tournaments list
-  navigateTo('/')
+  try {
+    const { $api } = useNuxtApp()
+    const startDateISO = new Date(`${form.value.startDate}T${form.value.startTime}:00`).toISOString()
+    const payload = {
+      title: form.value.name,
+      description: form.value.description,
+      game: form.value.game,
+      prizePool: form.value.prize ? Number(String(form.value.prize).replace(/[^0-9.]/g, '')) : 0,
+      startDate: startDateISO,
+      maxParticipants: Number(form.value.maxParticipants),
+      format: form.value.format.toUpperCase().replace('-', '_'),
+      isPublic: form.value.isPublic,
+      registrationOpen: form.value.registrationOpen,
+      rules: form.value.rules
+    }
+    const created: any = await $api('/tournaments', {
+      method: 'POST',
+      body: payload
+    })
+
+    const toast = useToast()
+    toast.add({
+      title: 'Турнир создан!',
+      description: `Турнир "${created.title || form.value.name}" успешно создан`,
+      color: 'success'
+    })
+
+    navigateTo(`/tournaments/${created.id}`)
+  } catch (e: any) {
+    const toast = useToast()
+    toast.add({
+      title: 'Ошибка создания',
+      description: e?.message || 'Не удалось создать турнир',
+      color: 'error'
+    })
+  }
 }
 
 const cancel = () => {
