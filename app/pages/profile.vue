@@ -25,8 +25,8 @@
               <div class="relative mb-4">
                 <div class="w-32 h-32 rounded-full border-4 border-[#374151] overflow-hidden">
                   <img 
-                    :src="user.avatar" 
-                    :alt="user.username"
+                    :src="user.avatar || 'https://api.dicebear.com/7.x/shapes/svg?seed=' + encodeURIComponent(user.username || 'user')" 
+                    :alt="user.username || 'user'"
                     class="w-full h-full object-cover"
                   />
                 </div>
@@ -40,17 +40,17 @@
               <!-- User Info -->
               <div class="text-center">
                 <h1 class="text-[32px] leading-[32px] font-bold text-white mb-2">
-                  {{ user.username }}
+                  {{ user.username || 'Профиль' }}
                 </h1>
-                <p class="text-[24px] leading-[24px] text-[#d1d5dc] mb-4">
-                  {{ user.fullName }}
+                <p class="text-[24px] leading-[24px] text-[#d1d5dc] mb-4" v-if="displayName">
+                  {{ displayName }}
                 </p>
-                <div class="flex items-center justify-center gap-2 mb-4">
-                  <span class="text-[20px] leading-[20px] text-[#d1d5dc]">🇷🇺 Россия</span>
+                <div class="flex items-center justify-center gap-2 mb-4" v-if="country">
+                  <span class="text-[20px] leading-[20px] text-[#d1d5dc]">{{ country }}</span>
                 </div>
                 <div class="inline-block bg-[#374151] rounded px-3 py-1">
                   <span class="text-[16px] leading-[16px] text-[#d1d5dc]">
-                    Рейтинг: {{ user.rating.toLocaleString() }}
+                    Рейтинг: {{ (user.stats?.tournaments ?? 0).toLocaleString() }}
                   </span>
                 </div>
               </div>
@@ -62,7 +62,7 @@
               <div class="grid grid-cols-4 gap-8 mb-8">
                 <div class="text-center">
                   <div class="text-[32px] leading-[32px] font-bold text-white mb-1">
-                    {{ user.stats.tournaments }}
+                    {{ user.stats?.tournaments ?? 0 }}
                   </div>
                   <div class="text-[20px] leading-[20px] text-[#99a1af]">
                     Турниров
@@ -70,7 +70,7 @@
                 </div>
                 <div class="text-center">
                   <div class="text-[32px] leading-[32px] font-bold text-white mb-1">
-                    {{ user.stats.wins }}
+                    {{ user.stats?.wins ?? 0 }}
                   </div>
                   <div class="text-[20px] leading-[20px] text-[#99a1af]">
                     Побед
@@ -78,7 +78,7 @@
                 </div>
                 <div class="text-center">
                   <div class="text-[32px] leading-[32px] font-bold text-white mb-1">
-                    {{ user.stats.topThree }}
+                    {{ topThree }}
                   </div>
                   <div class="text-[20px] leading-[20px] text-[#99a1af]">
                     Топ 3
@@ -86,7 +86,7 @@
                 </div>
                 <div class="text-center">
                   <div class="text-[32px] leading-[32px] font-bold text-white mb-1">
-                    ${{ user.stats.earnings.toLocaleString() }}
+                    ${{ (user.stats?.earnings ?? 0).toLocaleString() }}
                   </div>
                   <div class="text-[20px] leading-[20px] text-[#99a1af]">
                     Выиграно
@@ -96,7 +96,7 @@
 
               <!-- Additional Info -->
               <div class="space-y-4 mb-8">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2" v-if="user.team">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.667 14V12.667C10.667 11.95 10.382 11.263 9.882 10.763C9.382 10.263 8.694 9.978 7.978 9.978H3.311C2.595 9.978 1.908 10.263 1.408 10.763C0.908 11.263 0.622 11.95 0.622 12.667V14M13.333 5.333V9.333M15.333 7.333H11.333M8.311 4.667C8.311 6.135 7.135 7.311 5.667 7.311C4.198 7.311 3.022 6.135 3.022 4.667C3.022 3.198 4.198 2.022 5.667 2.022C7.135 2.022 8.311 3.198 8.311 4.667Z" stroke="#99a1af" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -104,21 +104,21 @@
                     Команда: {{ user.team }}
                   </span>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2" v-if="memberSince">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 14.667A6.667 6.667 0 1 0 8 1.333a6.667 6.667 0 0 0 0 13.334ZM8 4.667V8l2.667 2.667" stroke="#99a1af" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                   <span class="text-[20px] leading-[20px] text-[#d1d5dc]">
-                    На платформе с {{ user.memberSince }}
+                    На платформе с {{ memberSince }}
                   </span>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2" v-if="lastActivity">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 14.667A6.667 6.667 0 1 0 8 1.333a6.667 6.667 0 0 0 0 13.334Z" stroke="#99a1af" stroke-width="1.33"/>
                     <path d="M8 8A2.667 2.667 0 1 0 8 2.667 2.667 2.667 0 0 0 8 8Z" fill="#00ffe0"/>
                   </svg>
                   <span class="text-[20px] leading-[20px] text-[#d1d5dc]">
-                    Последняя активность: {{ user.lastActivity }}
+                    Последняя активность: {{ lastActivity }}
                   </span>
                 </div>
               </div>
@@ -142,9 +142,9 @@
         </div>
 
         <!-- Profile Description -->
-        <div class="border-t border-[#374151] px-8 py-6">
+        <div class="border-t border-[#374151] px-8 py-6" v-if="false">
           <p class="text-[26px] leading-[26px] text-[#d1d5dc]">
-            {{ user.description }}
+            
           </p>
         </div>
       </div>
@@ -158,7 +158,7 @@
             :key="tab.id"
             @click="activeTab = tab.id"
             :variant="activeTab === tab.id ? 'solid' : 'ghost'"
-            :color="activeTab === tab.id ? 'primary' : 'gray'"
+            :color="activeTab === tab.id ? 'primary' : 'neutral'"
             size="lg"
             :class="[
               activeTab === tab.id
@@ -266,8 +266,11 @@
 <script setup lang="ts">
 // Page meta
 definePageMeta({
-  title: 'Профиль'
+  title: 'Профиль',
+  middleware: ['auth']
 })
+
+const { api } = useApi()
 
 // Tab management
 const activeTab = ref('tournaments')
@@ -279,75 +282,92 @@ const tabs = [
   { id: 'settings', label: 'Настройки' }
 ]
 
-// Mock user data
-const user = ref({
-  username: 'ProGamer2025',
-  fullName: 'Александр Петров',
-  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&h=120&fit=crop&crop=face',
-  rating: 1847,
-  team: 'Team Alpha',
-  memberSince: 'января 2022',
-  lastActivity: 'сегодня',
-  description: 'Профессиональный игрок в Counter-Strike 2 и Valorant. Участвую в турнирах уже 3 года.',
-  stats: {
-    tournaments: 5,
-    wins: 2,
-    topThree: 4,
-    earnings: 15500
+// User state
+interface UserStats {
+  tournaments: number
+  wins: number
+  top3: number
+  earnings: number
+}
+
+interface UserUI {
+  id?: string
+  username?: string
+  email?: string
+  avatar?: string
+  team?: string
+  createdAt?: string
+  stats?: UserStats
+}
+
+const user = ref<UserUI>({ stats: { tournaments: 0, wins: 0, top3: 0, earnings: 0 } })
+
+// История турниров
+const tournamentHistory = ref<any[]>([])
+
+const displayName = computed(() => user.value.username || '')
+const topThree = computed(() => user.value.stats?.top3 ?? 0)
+const country = '' // placeholder for future geo data
+const memberSince = computed(() => {
+  if (!user.value.createdAt) return ''
+  try {
+    const date = new Date(user.value.createdAt)
+    return date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long' })
+  } catch (_) {
+    return ''
   }
 })
+const lastActivity = '' // backend пока не предоставляет
+const description = '' // убрано из шаблона
 
-// Mock tournament history
-const tournamentHistory = ref([
-  {
-    id: 1,
-    name: 'Winter Championship 2025',
-    game: 'Soulcalibur VI',
-    status: 'live',
-    place: '#1 из 16',
-    date: '15.01.2025',
-    participants: 16,
-    prize: 5000
-  },
-  {
-    id: 2,
-    name: 'New Year Clash 2025',
-    game: 'Counter-Strike 2',
-    status: 'completed',
-    place: '#3 из 32',
-    date: '01.01.2025',
-    participants: 32,
-    prize: 2500
-  },
-  {
-    id: 3,
-    name: 'Autumn Clash 2024',
-    game: 'Valorant',
-    status: 'completed',
-    place: '#1 из 32',
-    date: '20.11.2024',
-    participants: 32,
-    prize: 5000
-  },
-  {
-    id: 4,
-    name: 'Summer Showdown 2024',
-    game: 'Counter-Strike 2',
-    status: 'completed',
-    place: '#2 из 24',
-    date: '15.08.2024',
-    participants: 24,
-    prize: 3000
-  },
-  {
-    id: 5,
-    name: 'Spring Open 2024',
-    game: 'Dota 2',
-    status: 'completed',
-    place: '#8 из 16',
-    date: '10.04.2024',
-    participants: 16,
-    prize: 0
+// Загрузка данных пользователя с useAsyncData
+const { data: userData, error: userError, pending: userPending } = await useAsyncData('user-profile', async () => {
+  const me = await api('/auth/me') as any
+  return me?.data?.user
+})
+
+// Загрузка истории турниров с useAsyncData
+const { data: tournamentsData, error: tournamentsError, pending: tournamentsPending } = await useAsyncData('user-tournaments', async () => {
+  if (!userData.value?.id) return []
+  
+  try {
+    const response = await api(`/users/${userData.value.id}/tournaments`) as any
+    const items = response?.data?.items || []
+    return items.map((entry: any, idx: number) => {
+      const t = entry.tournament
+      return {
+        id: t.id || idx,
+        name: t.title,
+        game: t.game,
+        status: (t.status || '').toLowerCase() === 'live' ? 'live' : (t.status || 'completed').toLowerCase(),
+        place: entry.participation?.finalPosition ? `#${entry.participation.finalPosition}` : '-',
+        date: new Date(t.startDate).toLocaleDateString('ru-RU'),
+        participants: `${t.currentParticipants ?? 0}/${t.maxParticipants ?? 0}`,
+        prize: t.prizePool ?? 0
+      }
+    })
+  } catch (error) {
+    return []
   }
-])
+}, {
+  watch: [userData]
+})
+
+// Обновляем реактивные данные
+watch(userData, (newUser) => {
+  if (newUser) {
+    user.value = newUser
+  }
+}, { immediate: true })
+
+watch(tournamentsData, (newTournaments) => {
+  tournamentHistory.value = newTournaments || []
+}, { immediate: true })
+
+// Обработка ошибок
+watch(userError, (error) => {
+  if (error && 'status' in error && error.status === 401) {
+    navigateTo(`/login?redirect=${encodeURIComponent('/profile')}`)
+  }
+})
 </script>

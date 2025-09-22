@@ -258,24 +258,26 @@ const validateForm = (): boolean => {
 }
 
 const handleSubmit = async () => {
-  if (!validateForm()) return
+  // if (!validateForm()) return
 
   isLoading.value = true
   
   try {
-    console.log('submit', form)
-    const { $api } = useNuxtApp()
+    const { api, setToken } = useApi()
     
-    const response = await $api('/auth/register', {
+    const response = await api('/auth/register', {
       method: 'POST',
       body: {
         username: form.username,
         email: form.email,
-        password: form.password
+        password: form.password,
+        confirmPassword: form.confirmPassword
       }
     })
-    if (response && (response as any).token) {
-      localStorage.setItem('access_token', (response as any).token)
+    
+    if (response && (response as any)?.data?.token) {
+      const token = (response as any)?.data?.token
+      setToken(token)
     }
     emit('success', (response as any).user || { username: form.username, email: form.email })
     

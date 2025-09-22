@@ -4,17 +4,20 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   css: ['~/assets/css/main.css'],
+  
+  ssr: true,
 
   modules: [
+    '@nuxt/ui',
     '@nuxt/eslint',
     '@nuxt/scripts',
     '@nuxt/test-utils',
-    '@nuxt/ui'
+    '@vueuse/nuxt'
   ],
 
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:3001'
+      apiBase: 'http://localhost:3001'
     }
   }
 })

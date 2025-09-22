@@ -26,8 +26,12 @@ useHead({
 
 // Обработчики событий
 const handleLoginSuccess = (user: any) => {
+  // Получаем redirect параметр из URL
+  const route = useRoute()
+  const redirectTo = route.query.redirect as string || '/profile'
+  
   // Перенаправление после успешного входа
-  navigateTo('/profile')
+  navigateTo(redirectTo)
 }
 
 const handleLoginError = (error: string) => {

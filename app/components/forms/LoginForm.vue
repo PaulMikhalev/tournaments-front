@@ -120,8 +120,8 @@ const emit = defineEmits<{
 
 // Реактивные данные
 const form = reactive<LoginForm>({
-  email: '',
-  password: '',
+  email: 'keek@keek.keek',
+  password: 'qwer1234',
   rememberMe: false
 })
 
@@ -167,16 +167,18 @@ const handleSubmit = async () => {
   isLoading.value = true
   
   try {
-    const { $api } = useNuxtApp()
-    const response = await $api('/auth/login', {
+    const { api, setToken } = useApi()
+    const response = await api('/auth/login', {
       method: 'POST',
       body: {
         email: form.email,
         password: form.password
       }
     })
-    if (response && (response as any).token) {
-      localStorage.setItem('access_token', (response as any).token)
+    
+    if (response && (response as any)?.data?.token) {
+      const token = (response as any)?.data?.token
+      setToken(token)
     }
     emit('success', (response as any).user || { email: form.email })
     

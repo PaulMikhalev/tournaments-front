@@ -1,5 +1,39 @@
 # Changelog
 
+## [2025-01-27] - Оптимизация производительности Nuxt 4 в dev режиме
+### Добавлено
+- Отключена автоматическая загрузка всех компонентов через `components: { global: false, dirs: [] }`
+- Настроена оптимизация Vite для dev режима с `optimizeDeps` и `manualChunks`
+- Реализован lazy loading для всех компонентов через `defineAsyncComponent`
+
+### Изменено
+- Обновлен `nuxt.config.ts` с оптимизациями для dev режима
+- Переведены все страницы на lazy loading компонентов:
+  - `app/layouts/default.vue` - Header и Footer
+  - `app/pages/index.vue` - MainBanner и TournamentsList
+  - `app/pages/tournaments/index.vue` - TournamentsList
+  - `app/pages/tournaments/[id].vue` - TournamentHeader, TournamentTabs, TournamentOverview
+  - `app/pages/login.vue` - LoginForm
+  - `app/pages/register.vue` - RegisterForm
+- Настроен proxy для API через Nitro в dev режиме
+
+### Исправлено
+- Устранена проблема с 750+ запросами при первой загрузке страницы
+- Улучшена производительность dev сервера
+- Исправлены ошибки линтера в конфигурации
+
+## [2025-09-22] - Интеграция данных пользователя на странице профиля
+### Добавлено
+- Загрузка текущего пользователя через `/auth/me` в `app/pages/profile.vue`
+- Подгрузка истории участия пользователя через `/users/:id/tournaments`
+
+### Изменено
+- Удалены мок-поля `fullName` и `description` из шаблона профиля
+- Обновлена верстка под реальные поля пользователя (`username`, `avatar`, `team`, `createdAt`, `stats`)
+
+### Исправлено
+- Приведены типы Nuxt UI `UButton` цветов (`gray` → `neutral`)
+
 ## [2025-09-22] - Интеграция фронтенда с backend API (старт)
 ### Добавлено
 - Базовая конфигурация `runtimeConfig.public.apiBase` для Nuxt
