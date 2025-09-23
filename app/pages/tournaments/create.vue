@@ -164,14 +164,16 @@ const onSubmit = async () => {
       body: payload
     })
 
+    console.log('created', created)
+    
     const toast = useToast()
     toast.add({
       title: 'Турнир создан!',
-      description: `Турнир "${created.title || form.value.name}" успешно создан`,
+      description: `Турнир "${created.data.title || form.value.name}" успешно создан`,
       color: 'success'
     })
 
-    navigateTo(`/tournaments/${created.id}`)
+    navigateTo(`/tournaments/${created.data.id}`)
   } catch (e: any) {
     const toast = useToast()
     toast.add({
