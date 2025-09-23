@@ -6,70 +6,30 @@
         <UInput v-model="character" placeholder="Введите имя персонажа" :disabled="loading" />
       </div>
       
-      <div class="space-y-2">
+      <div class="flex flex-col gap-2 items-center justify-center">
         <!-- 1 строка - 5 персонажей -->
         <div class="grid grid-cols-5 gap-2">
-          <div 
-            v-for="(char, id) in characterList.slice(0, 5)" 
-            :key="id"
-            class="size-28 bg-gray-200 text-black flex items-center justify-center text-center p-2 cursor-pointer hover:bg-gray-300 transition-colors"
-            :class="{ 'bg-red-500 text-white': char === null }"
-            @click="selectCharacter(char)"
-          >
-            {{ char ? getCharacterName(char) : 'Random' }}
-          </div>
+          <CharItem v-for="(char, id) in characterList.slice(0, 5)" :key="id" :character="char" @click="selectCharacter(char)" />
         </div>
         
         <!-- 2 строка - 7 персонажей -->
         <div class="grid grid-cols-7 gap-2">
-          <div 
-            v-for="(char, id) in characterList.slice(5, 12)" 
-            :key="id + 5"
-            class="size-28 bg-gray-200 text-black flex items-center justify-center text-center p-2 cursor-pointer hover:bg-gray-300 transition-colors"
-            :class="{ 'bg-red-500 text-white': char === null }"
-            @click="selectCharacter(char)"
-          >
-            {{ char ? getCharacterName(char) : 'Random' }}
-          </div>
+            <CharItem v-for="(char, id) in characterList.slice(5, 12)" :key="id" :character="char" @click="selectCharacter(char)" />
         </div>
         
         <!-- 3 строка - 7 персонажей -->
         <div class="grid grid-cols-7 gap-2">
-          <div 
-            v-for="(char, id) in characterList.slice(12, 19)" 
-            :key="id + 12"
-            class="size-28 bg-gray-200 text-black flex items-center justify-center text-center p-2 cursor-pointer hover:bg-gray-300 transition-colors"
-            :class="{ 'bg-red-500 text-white': char === null }"
-            @click="selectCharacter(char)"
-          >
-            {{ char ? getCharacterName(char) : 'Random' }}
-          </div>
+          <CharItem v-for="(char, id) in characterList.slice(12, 19)" :key="id" :character="char" @click="selectCharacter(char)" />
         </div>
         
         <!-- 4 строка - 7 персонажей -->
         <div class="grid grid-cols-7 gap-2">
-          <div 
-            v-for="(char, id) in characterList.slice(19, 26)" 
-            :key="id + 19"
-            class="size-28 bg-gray-200 text-black flex items-center justify-center text-center p-2 cursor-pointer hover:bg-gray-300 transition-colors"
-            :class="{ 'bg-red-500 text-white': char === null }"
-            @click="selectCharacter(char)"
-          >
-            {{ char ? getCharacterName(char) : 'Random' }}
-          </div>
+          <CharItem v-for="(char, id) in characterList.slice(19, 26)" :key="id" :character="char" @click="selectCharacter(char)" />
         </div>
         
         <!-- 5 строка - 3 персонажа -->
         <div class="grid grid-cols-3 gap-2">
-          <div 
-            v-for="(char, id) in characterList.slice(26, 29)" 
-            :key="id + 26"
-            class="size-28 bg-gray-200 text-black flex items-center justify-center text-center p-2 cursor-pointer hover:bg-gray-300 transition-colors"
-            :class="{ 'bg-red-500 text-white': char === null }"
-            @click="selectCharacter(char)"
-          >
-            {{ char ? getCharacterName(char) : 'Random' }}
-          </div>
+          <CharItem v-for="(char, id) in characterList.slice(26, 29)" :key="id" :character="char" @click="selectCharacter(char)" />
         </div>
       </div>
     </template>
@@ -84,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import CharItem from '~/components/sc6/CharacterItem.vue';
 import { characterListInGameOrder, getCharacterName } from '~/types/soulcalibur';
 
 const props = defineProps<{ open: boolean; loading?: boolean }>()
