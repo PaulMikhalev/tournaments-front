@@ -124,27 +124,14 @@
 </template>
 
 <script setup lang="ts">
-interface Tournament {
-  id: number
-  title: string
-  game: string
-  date: string
-  time?: string
-  prize: string
-  participants: number
-  maxParticipants: number
-  status: 'live' | 'registration' | 'upcoming' | 'completed'
-  progress: number
-  image: string
-  description: string
-}
+import type { TournamentView, TournamentStatus } from '~/types/tournament'
 
 const props = defineProps<{
-  tournament: Tournament
+  tournament: TournamentView
 }>()
 
 const statusBadgeClass = computed(() => {
-  switch (props.tournament.status) {
+  switch (props.tournament.status?.toLowerCase() as TournamentStatus) {
     case 'live':
       return 'bg-[#dc2626] text-white'
     case 'registration':
@@ -157,7 +144,7 @@ const statusBadgeClass = computed(() => {
 })
 
 const statusText = computed(() => {
-  switch (props.tournament.status) {
+  switch (props.tournament.status?.toLowerCase() as TournamentStatus) {
     case 'live':
       return 'Live'
     case 'registration':

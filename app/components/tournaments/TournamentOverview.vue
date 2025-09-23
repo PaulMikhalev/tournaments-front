@@ -51,22 +51,10 @@
 
 <script setup lang="ts">
 import TournamentBracket from '~/components/tournaments/TournamentBracket.vue'
-
-interface Tournament {
-  id: number
-  title: string
-  game: string
-  date: string
-  prize: string
-  participants: number
-  maxParticipants: number
-  status: 'live' | 'registration' | 'upcoming' | 'completed'
-  progress: number
-  image: string
-}
+import type { TournamentView } from '~/types/tournament'
 
 const props = defineProps<{
-  tournament: Tournament
+  tournament: TournamentView
   activeTab?: string
 }>()
 </script>

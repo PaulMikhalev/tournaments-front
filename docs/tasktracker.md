@@ -62,7 +62,7 @@
   - [x] Добавить runtimeConfig и плагин `$api` для `$fetch` с токеном
   - [ ] Интегрировать `/auth/login` и `/auth/register` в формы
   - [ ] Интегрировать список турниров `GET /tournaments`
-  - [ ] Интегрировать детали турнира `GET /tournaments/:id`
+  - [x] Интегрировать детали турнира `GET /tournaments/:id`
   - [ ] Интегрировать создание турнира `POST /tournaments`
 - **Зависимости**: Backend `auth`, `tournaments`, CORS `http://localhost:3000`
 

@@ -1,3 +1,5 @@
+import type { ApiResponse } from '~/types/api'
+
 export const useApi = () => {
   const config = useRuntimeConfig()
   const base = `${String(config.public.apiBase || '').replace(/\/+$/, '')}/api`
@@ -29,19 +31,19 @@ export const useApi = () => {
     cookies.value = ''
   }
 
-  const api = async (url: string, options: any = {}) => {
+  const api = async <T = unknown>(url: string, options: Record<string, any> = {}) => {
     const token = getToken()
     
-    const headers = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers
+      ...(options.headers || {})
     }
     
     if (token) {
       headers.Authorization = `Bearer ${token}`
     }
     
-    return $fetch(base + url, {
+    return $fetch<ApiResponse<T>>(base + url, {
       ...options,
       headers,
       credentials: 'include'

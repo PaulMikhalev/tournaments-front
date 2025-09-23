@@ -32,6 +32,19 @@
 - Избыточные фиксированные `px-[208.5px]` удалены для корректной адаптивности.
 # Changelog
 
+## [2025-09-23] - Детали турнира: типизация, API-ответ и рефактор
+### Добавлено
+- Общие типы `TournamentStatus`, `TournamentFormat`, `TournamentDto`, `TournamentView` в `app/types/tournament.ts`.
+- Общие типы API-ответов `ApiResponse`, `PaginatedResponse` в `app/types/api.ts`.
+
+### Изменено
+- `useApi().api<T>` теперь возвращает `ApiResponse<T>` с типовым контрактом backend.
+- Страница `app/pages/tournaments/[id].vue` переведена на `useApi` и типы, добавлена проверка `success`/`data`.
+- Компоненты `TournamentHeader.vue` и `TournamentOverview.vue` используют `TournamentView`.
+
+### Исправлено
+- Устранена ошибка типов: `'$api' is of type 'unknown'`.
+
 ## [2025-09-23] - Документация SC6 режима «Игра на вылет» (Frontend)
 ### Добавлено
 - В `docs/Project.md` добавлен раздел UI/UX для SC6: ростер, таймлайн, кнопки действий, интеграция с API.

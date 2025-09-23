@@ -2,7 +2,7 @@
 
 - Типы вынесены в `app/types`:
   - `auth.ts`: `LoginFormValues`, `LoginFormErrors`, `RegisterFormValues`, `RegisterFormErrors`
-  - `tournament.ts`: `TournamentCreateValues`
+- `tournament.ts`: `TournamentCreateValues`, `TournamentStatus`, `TournamentFormat`, `TournamentDto`, `TournamentView`
 
 - Схемы валидации на Zod в `app/schema`:
   - `auth.ts`: `loginSchema`, `registerSchema`
@@ -300,7 +300,7 @@ interface User {
 
 ### Турниры
 - Список: `GET /tournaments`
-- Детали: `GET /tournaments/:id`
+- Детали: `GET /tournaments/:id` (возвращает `ApiResponse<TournamentDto>`, маппится в `TournamentView` на клиенте)
 - Создание: `POST /tournaments`
 
 Пример использования в компонентах доступен в `LoginForm.vue`, `RegisterForm.vue`, `TournamentsList.vue`, `pages/tournaments/[id].vue`, `pages/tournaments/create.vue`.

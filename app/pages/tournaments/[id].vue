@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#101828]">
+  <div class="min-h-screen bg-[#101828]" v-if="tournament">
     <!-- Tournament Header -->
     <TournamentHeader :tournament="tournament" />
     
@@ -17,17 +17,20 @@
 import TournamentHeader from '~/components/tournaments/TournamentHeader.vue'
 import TournamentTabs from '~/components/tournaments/TournamentTabs.vue'
 import TournamentOverview from '~/components/tournaments/TournamentOverview.vue'
+import type { TournamentDto, TournamentView } from '~/types/tournament'
 
 // Get tournament ID from route
 const route = useRoute()
 const tournamentId = route.params.id
 
-const tournament = ref<any>(null)
+const tournament = ref<TournamentView | null>(null)
 
 onMounted(async () => {
   try {
-    const { $api } = useNuxtApp()
-    const data = await $api(`/tournaments/${tournamentId}`, { method: 'GET' })
+    const { api } = useApi()
+    const tournamentResponseData = await api<TournamentDto>(`/tournaments/${tournamentId}`, { method: 'GET' })
+    if (!tournamentResponseData.success || !tournamentResponseData.data) throw new Error(tournamentResponseData.message || 'Failed to load tournament')
+    const data = tournamentResponseData.data
     tournament.value = {
       id: data.id,
       title: data.title,
@@ -52,7 +55,7 @@ onMounted(async () => {
 })
 
 // Set page title
-useHead({
-  title: `${tournament?.value?.title || 'Турнир'} - Турнир | CyberTournaments`
-})
+useHead(() => ({
+  title: `${tournament.value?.title || 'Турнир'} - Турнир | CyberTournaments`
+}))
 </script>
