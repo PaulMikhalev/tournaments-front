@@ -321,6 +321,9 @@
 </template>
 
 <script setup lang="ts">
+import { tournamentCreateSchema } from '@/app/schema/tournament'
+import type { TournamentCreateValues } from '@/app/types/tournament'
+
 // Game options for select
 const gameOptions = [
   { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
@@ -331,7 +334,7 @@ const gameOptions = [
 ]
 
 // Form data
-const form = ref({
+const form = ref<TournamentCreateValues>({
   name: '',
   description: '',
   game: '',
@@ -347,12 +350,12 @@ const form = ref({
 
 // Actions
 const createTournament = async () => {
-  // Validate form
-  if (!form.value.name || !form.value.game || !form.value.startDate || !form.value.startTime) {
+  const parsed = tournamentCreateSchema.safeParse(form.value)
+  if (!parsed.success) {
     const toast = useToast()
     toast.add({
       title: 'Ошибка валидации',
-      description: 'Пожалуйста, заполните все обязательные поля',
+      description: parsed.error.issues[0]?.message || 'Пожалуйста, заполните все обязательные поля',
       color: 'error'
     })
     return
@@ -362,16 +365,16 @@ const createTournament = async () => {
     const { $api } = useNuxtApp()
     const startDateISO = new Date(`${form.value.startDate}T${form.value.startTime}:00`).toISOString()
     const payload = {
-      title: form.value.name,
-      description: form.value.description,
-      game: form.value.game,
-      prizePool: form.value.prize ? Number(String(form.value.prize).replace(/[^0-9.]/g, '')) : 0,
+      title: parsed.data.name,
+      description: parsed.data.description,
+      game: parsed.data.game,
+      prizePool: parsed.data.prize,
       startDate: startDateISO,
-      maxParticipants: Number(form.value.maxParticipants),
-      format: form.value.format.toUpperCase().replace('-', '_'),
-      isPublic: form.value.isPublic,
-      registrationOpen: form.value.registrationOpen,
-      rules: form.value.rules
+      maxParticipants: parsed.data.maxParticipants,
+      format: parsed.data.format.toUpperCase().replace('-', '_'),
+      isPublic: parsed.data.isPublic,
+      registrationOpen: parsed.data.registrationOpen,
+      rules: parsed.data.rules
     }
     const created: any = await $api('/tournaments', {
       method: 'POST',

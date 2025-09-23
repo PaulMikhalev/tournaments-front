@@ -151,24 +151,8 @@
 </template>
 
 <script setup lang="ts">
-interface RegisterForm {
-  username: string
-  email: string
-  password: string
-  confirmPassword: string
-  team: string
-  agreeToTerms: boolean
-}
-
-interface RegisterErrors {
-  username?: string
-  email?: string
-  password?: string
-  confirmPassword?: string
-  team?: string
-  agreeToTerms?: string
-  general?: string
-}
+import { registerSchema } from '@/app/schema/auth'
+import type { RegisterFormValues, RegisterFormErrors } from '@/app/types/auth'
 
 // События
 const emit = defineEmits<{
@@ -177,7 +161,7 @@ const emit = defineEmits<{
 }>()
 
 // Реактивные данные
-const form = reactive<RegisterForm>({
+const form = reactive<RegisterFormValues>({
   username: '',
   email: '',
   password: '',
@@ -186,79 +170,26 @@ const form = reactive<RegisterForm>({
   agreeToTerms: false
 })
 
-const errors = reactive<RegisterErrors>({})
+const errors = reactive<RegisterFormErrors>({})
 const isLoading = ref(false)
 
 // Вычисляемые свойства
-const isFormValid = computed(() => {
-  return form.username && 
-         form.email && 
-         form.password && 
-         form.confirmPassword && 
-         form.agreeToTerms && 
-         !Object.keys(errors).length
-})
+const isFormValid = computed(() => registerSchema.safeParse(form).success)
 
 // Методы
 const validateForm = (): boolean => {
-  // Очистка предыдущих ошибок
-  Object.keys(errors).forEach(key => delete errors[key as keyof RegisterErrors])
-
-  let isValid = true
-
-  // Валидация имени пользователя
-  if (!form.username) {
-    errors.username = 'Имя пользователя обязательно'
-    isValid = false
-  } else if (form.username.length < 3) {
-    errors.username = 'Имя пользователя должно содержать минимум 3 символа'
-    isValid = false
-  } else if (!/^[a-zA-Z0-9_]+$/.test(form.username)) {
-    errors.username = 'Имя пользователя может содержать только буквы, цифры и подчеркивания'
-    isValid = false
+  Object.keys(errors).forEach(key => delete (errors as any)[key])
+  const result = registerSchema.safeParse(form)
+  if (result.success) return true
+  for (const issue of result.error.issues) {
+    const field = issue.path[0] as keyof RegisterFormValues | undefined
+    if (field) (errors as any)[field] = issue.message
   }
-
-  // Валидация email
-  if (!form.email) {
-    errors.email = 'Email обязателен'
-    isValid = false
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = 'Некорректный email'
-    isValid = false
-  }
-
-  // Валидация пароля
-  if (!form.password) {
-    errors.password = 'Пароль обязателен'
-    isValid = false
-  } else if (form.password.length < 8) {
-    errors.password = 'Пароль должен содержать минимум 8 символов'
-    isValid = false
-  } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(form.password)) {
-    errors.password = 'Пароль должен содержать заглавные и строчные буквы, а также цифры'
-    isValid = false
-  }
-
-  // Валидация подтверждения пароля
-  if (!form.confirmPassword) {
-    errors.confirmPassword = 'Подтверждение пароля обязательно'
-    isValid = false
-  } else if (form.password !== form.confirmPassword) {
-    errors.confirmPassword = 'Пароли не совпадают'
-    isValid = false
-  }
-
-  // Валидация согласия с условиями
-  if (!form.agreeToTerms) {
-    errors.agreeToTerms = 'Необходимо согласиться с условиями использования'
-    isValid = false
-  }
-
-  return isValid
+  return false
 }
 
 const handleSubmit = async () => {
-  // if (!validateForm()) return
+  if (!validateForm()) return
 
   isLoading.value = true
   

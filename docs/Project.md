@@ -1,3 +1,14 @@
+### Типы и схемы валидации
+
+- Типы вынесены в `app/types`:
+  - `auth.ts`: `LoginFormValues`, `LoginFormErrors`, `RegisterFormValues`, `RegisterFormErrors`
+  - `tournament.ts`: `TournamentCreateValues`
+
+- Схемы валидации на Zod в `app/schema`:
+  - `auth.ts`: `loginSchema`, `registerSchema`
+  - `tournament.ts`: `tournamentCreateSchema`
+
+- Формы используют `safeParse` для проверки и заполняют ошибки по полям.
 # Tournaments Frontend Project
 
 ## 📋 Обзор проекта

@@ -1,3 +1,14 @@
+## [2025-09-23] - Рефакторинг типизации и валидации на фронтенде
+### Добавлено
+- Папка `app/types` с типами: `auth.ts`, `tournament.ts`.
+- Папка `app/schema` с Zod-схемами: `auth.ts`, `tournament.ts`.
+
+### Изменено
+- `LoginForm.vue` и `RegisterForm.vue` переведены на Zod-валидацию и типы из `app/types`.
+- Страница `app/pages/tournaments/create.vue` использует Zod-схему `tournamentCreateSchema` для валидации и нормализации payload.
+
+### Исправлено
+- Единообразная валидация email/паролей и вывод ошибок на формах.
 ## [2025-09-23] - Header: авторизация и контейнер ширины
 ### Добавлено
 - Условный рендер кнопок «Войти» и «Регистрация» в `app/components/layout/Header.vue` на основе `useApi().accessToken`.

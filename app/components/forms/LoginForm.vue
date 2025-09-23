@@ -100,17 +100,8 @@
 </template>
 
 <script setup lang="ts">
-interface LoginForm {
-  email: string
-  password: string
-  rememberMe: boolean
-}
-
-interface LoginErrors {
-  email?: string
-  password?: string
-  general?: string
-}
+import { loginSchema } from '@/app/schema/auth'
+import type { LoginFormValues, LoginFormErrors } from '@/app/types/auth'
 
 // События
 const emit = defineEmits<{
@@ -119,46 +110,28 @@ const emit = defineEmits<{
 }>()
 
 // Реактивные данные
-const form = reactive<LoginForm>({
-  email: 'keek@keek.keek',
-  password: 'qwer1234',
+const form = reactive<LoginFormValues>({
+  email: '',
+  password: '',
   rememberMe: false
 })
 
-const errors = reactive<LoginErrors>({})
+const errors = reactive<LoginFormErrors>({})
 const isLoading = ref(false)
 
 // Вычисляемые свойства
-const isFormValid = computed(() => {
-  return form.email && form.password && !Object.keys(errors).length
-})
+const isFormValid = computed(() => loginSchema.safeParse(form).success)
 
 // Методы
 const validateForm = (): boolean => {
-  // Очистка предыдущих ошибок
-  Object.keys(errors).forEach(key => delete errors[key as keyof LoginErrors])
-
-  let isValid = true
-
-  // Валидация email
-  if (!form.email) {
-    errors.email = 'Email обязателен'
-    isValid = false
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = 'Некорректный email'
-    isValid = false
+  Object.keys(errors).forEach(key => delete (errors as any)[key])
+  const result = loginSchema.safeParse(form)
+  if (result.success) return true
+  for (const issue of result.error.issues) {
+    const field = issue.path[0] as keyof LoginFormValues | undefined
+    if (field) errors[field] = issue.message
   }
-
-  // Валидация пароля
-  if (!form.password) {
-    errors.password = 'Пароль обязателен'
-    isValid = false
-  } else if (form.password.length < 6) {
-    errors.password = 'Пароль должен содержать минимум 6 символов'
-    isValid = false
-  }
-
-  return isValid
+  return false
 }
 
 const handleSubmit = async () => {
