@@ -66,7 +66,7 @@ const isSubmitting = ref(false)
 // Get refresh function from parent
 const refreshTournament = inject<() => void>('refreshTournament')
 
-const canJoin = computed(() => props.tournament?.status === 'registration')
+const canJoin = computed(() => props.tournament?.status === 'REGISTRATION')
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('ru-RU', {

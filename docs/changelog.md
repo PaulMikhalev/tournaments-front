@@ -1,3 +1,24 @@
+## [2025-09-23] - Актуализация типов турниров на основе API
+### Добавлено
+- Обновлены константы статусов турниров: `REGISTRATION`, `LIVE`, `COMPLETED`, `CANCELLED`
+- Обновлены константы форматов турниров: `SINGLE_ELIMINATION`, `DOUBLE_ELIMINATION`, `ROUND_ROBIN`, `SWISS`
+- Добавлены типы для статусов участников: `REGISTERED`, `CONFIRMED`, `DISQUALIFIED`, `WITHDRAWN`
+- Добавлены типы для статусов матчей: `SCHEDULED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
+- Добавлены типы запросов: `JoinTournamentRequest`, `CreateTournamentRequest`, `UpdateTournamentRequest`
+- Добавлен тип `MatchDto` для матчей турнира
+
+### Изменено
+- `TournamentDto` полностью переписан для соответствия backend API
+- `TournamentParticipant` обновлен с правильными типами статусов
+- `TournamentView` обновлен для работы с новыми типами
+- Страница турнира обновлена для работы с актуальными полями API
+- Компонент участников обновлен для работы с новыми статусами
+
+### Исправлено
+- Приведены в соответствие типы frontend и backend
+- Устранены ошибки типизации TypeScript
+- Обновлена логика отображения участников
+
 ## [2025-09-23] - Рефакторинг компонентов табов турнира
 ### Добавлено
 - Компонент `TournamentParticipantsTab.vue` для вкладки участников

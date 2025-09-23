@@ -44,20 +44,20 @@ const loadTournament = async () => {
       date: data.startDate ? new Date(data.startDate).toLocaleDateString('ru-RU') : '',
       time: data.startDate ? new Date(data.startDate).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : '',
       prize: data.prizePool ? `${data.prizePool}` : 'Хуёв тачка',
-      participants: data.participantsCount ?? 0,
+      participants: data.currentParticipants ?? 0,
       maxParticipants: data.maxParticipants ?? 16,
-      status: (data.status?.toLowerCase() as TournamentStatus) ?? 'upcoming',
+      status: data.status ?? 'REGISTRATION',
       progress: 0,
-      image: '/sc6/logo.jpg',
+      image: data.image ?? '/sc6/logo.jpg',
       description: data.description ?? '',
       format: data.format ?? '',
-      platform: data.platform ?? 'PC',
-      region: data.region ?? 'Европа',
+      platform: 'PC', // Default value since not in API
+      region: 'Европа', // Default value since not in API
       organizer: data.organizer?.username ?? '—',
-      participantsList: data.participantsList ?? []
+      participantsList: data.participants ?? []
     }
 
-    if (tournament.value?.status === 'registration') {
+    if (tournament.value?.status === 'REGISTRATION') {
       tabs.value = [
         { id: 'participants', label: 'Участники' },
         { id: 'rules', label: 'Правила' }

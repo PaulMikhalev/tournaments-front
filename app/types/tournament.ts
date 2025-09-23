@@ -1,21 +1,39 @@
-// Shared tournament constants and types
+// Shared tournament constants and types based on backend API
 export const tournamentStatuses = {
-  live: 'live',
-  registration: 'registration',
-  upcoming: 'upcoming',
-  completed: 'completed'
+  REGISTRATION: 'REGISTRATION',
+  LIVE: 'LIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
 } as const
 
 export type TournamentStatus = typeof tournamentStatuses[keyof typeof tournamentStatuses]
 
 export const tournamentFormats = {
-  elimination: 'elimination',
-  singleElimination: 'single-elimination',
-  doubleElimination: 'double-elimination',
-  roundRobin: 'round-robin'
+  SINGLE_ELIMINATION: 'SINGLE_ELIMINATION',
+  DOUBLE_ELIMINATION: 'DOUBLE_ELIMINATION',
+  ROUND_ROBIN: 'ROUND_ROBIN',
+  SWISS: 'SWISS'
 } as const
 
 export type TournamentFormat = typeof tournamentFormats[keyof typeof tournamentFormats]
+
+export const participantStatuses = {
+  REGISTERED: 'REGISTERED',
+  CONFIRMED: 'CONFIRMED',
+  DISQUALIFIED: 'DISQUALIFIED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type ParticipantStatus = typeof participantStatuses[keyof typeof participantStatuses]
+
+export const matchStatuses = {
+  SCHEDULED: 'SCHEDULED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type MatchStatus = typeof matchStatuses[keyof typeof matchStatuses]
 
 // Form values used when creating a tournament
 export type TournamentCreateValues = {
@@ -32,25 +50,35 @@ export type TournamentCreateValues = {
   rules: string
 }
 
-// Minimal tournament as returned by API for listing/details
+// Tournament as returned by API (matches backend TournamentResponse)
 export type TournamentDto = {
-  id: number
+  id: string
   title: string
-  game: string
-  startDate?: string
-  prizePool?: number
-  participantsCount?: number
-  maxParticipants?: number
-  status?: TournamentStatus
   description?: string
-  format?: TournamentFormat | string
-  platform?: string
-  region?: string
-  organizer?: { id: number; username: string } | null
-  participantsList?: TournamentParticipant[]
+  game: string
+  image?: string
+  status: TournamentStatus
+  startDate: string
+  endDate?: string
+  prizePool: number
+  maxParticipants: number
+  currentParticipants: number
+  format: TournamentFormat
+  isPublic: boolean
+  registrationOpen: boolean
+  rules?: string
+  organizer: {
+    id: string
+    username: string
+    avatar?: string
+  }
+  participants: TournamentParticipant[]
+  matches: MatchDto[]
+  createdAt: string
+  updatedAt: string
 }
 
-// Tournament participant type
+// Tournament participant type (matches backend TournamentParticipantResponse)
 export type TournamentParticipant = {
   id: string
   user: {
@@ -59,13 +87,36 @@ export type TournamentParticipant = {
     avatar?: string
     team?: string
   }
-  status: string
+  status: ParticipantStatus
   joinedAt: string
+}
+
+// Match type (matches backend MatchResponse)
+export type MatchDto = {
+  id: string
+  round: number
+  matchNumber: number
+  player1?: {
+    id: string
+    username: string
+    avatar?: string
+  }
+  player2?: {
+    id: string
+    username: string
+    avatar?: string
+  }
+  player1Score?: number
+  player2Score?: number
+  status: MatchStatus
+  scheduledAt?: string
+  startedAt?: string
+  completedAt?: string
 }
 
 // View-model used across UI components on tournament page
 export type TournamentView = {
-  id: number
+  id: string
   title: string
   game: string
   date: string
@@ -82,5 +133,41 @@ export type TournamentView = {
   region?: string
   organizer?: string
   participantsList?: TournamentParticipant[]
+}
+
+// Request types for API calls
+export type JoinTournamentRequest = {
+  character?: string
+}
+
+export type CreateTournamentRequest = {
+  title: string
+  description?: string
+  game: string
+  image?: string
+  startDate: string
+  endDate?: string
+  prizePool?: number
+  maxParticipants: number
+  format: TournamentFormat
+  isPublic: boolean
+  registrationOpen: boolean
+  rules?: string
+}
+
+export type UpdateTournamentRequest = {
+  title?: string
+  description?: string
+  game?: string
+  image?: string
+  startDate?: string
+  endDate?: string
+  prizePool?: number
+  maxParticipants?: number
+  format?: TournamentFormat
+  isPublic?: boolean
+  registrationOpen?: boolean
+  rules?: string
+  status?: TournamentStatus
 }
 
