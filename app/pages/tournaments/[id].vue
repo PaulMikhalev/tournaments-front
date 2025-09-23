@@ -4,7 +4,7 @@
     <TournamentHeader :tournament="tournament" />
     
     <!-- Tournament Tabs with Content -->
-    <TournamentTabs>
+    <TournamentTabs :tabs="tabs">
       <!-- Main Content -->
       <template #default="{ activeTab }">
         <TournamentOverview :tournament="tournament" :activeTab="activeTab" />
@@ -17,15 +17,21 @@
 import TournamentHeader from '~/components/tournaments/TournamentHeader.vue'
 import TournamentTabs from '~/components/tournaments/TournamentTabs.vue'
 import TournamentOverview from '~/components/tournaments/TournamentOverview.vue'
-import type { TournamentDto, TournamentView } from '~/types/tournament'
+import type { TournamentDto, TournamentView, TournamentStatus } from '~/types/tournament'
 
 // Get tournament ID from route
 const route = useRoute()
 const tournamentId = route.params.id
 
 const tournament = ref<TournamentView | null>(null)
+const tabs = ref<{ id: string; label: string }[]>([
+  { id: 'bracket', label: 'Турнирная сетка' },
+  { id: 'stream', label: 'Трансляция' },
+  { id: 'participants', label: 'Участники' },
+  { id: 'rules', label: 'Правила' }
+])
 
-onMounted(async () => {
+const loadTournament = async () => {
   try {
     const { api } = useApi()
     const tournamentResponseData = await api<TournamentDto>(`/tournaments/${tournamentId}`, { method: 'GET' })
@@ -40,19 +46,36 @@ onMounted(async () => {
       prize: data.prizePool ? `${data.prizePool}` : 'Хуёв тачка',
       participants: data.participantsCount ?? 0,
       maxParticipants: data.maxParticipants ?? 16,
-      status: data.status ?? 'upcoming',
+      status: (data.status?.toLowerCase() as TournamentStatus) ?? 'upcoming',
       progress: 0,
-      image: '/game-cs2.png',
+      image: '/sc6/logo.jpg',
       description: data.description ?? '',
       format: data.format ?? '',
       platform: data.platform ?? 'PC',
       region: data.region ?? 'Европа',
-      organizer: data.organizer?.username ?? '—'
+      organizer: data.organizer?.username ?? '—',
+      participantsList: data.participantsList ?? []
+    }
+
+    if (tournament.value?.status === 'registration') {
+      tabs.value = [
+        { id: 'participants', label: 'Участники' },
+        { id: 'rules', label: 'Правила' }
+      ]
     }
   } catch (e) {
     console.error('Failed to load tournament', e)
   }
-})
+}
+
+onMounted(loadTournament)
+
+// Expose refresh function for child components
+const refreshTournament = () => {
+  loadTournament()
+}
+
+provide('refreshTournament', refreshTournament)
 
 // Set page title
 useHead(() => ({

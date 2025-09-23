@@ -47,6 +47,20 @@ export type TournamentDto = {
   platform?: string
   region?: string
   organizer?: { id: number; username: string } | null
+  participantsList?: TournamentParticipant[]
+}
+
+// Tournament participant type
+export type TournamentParticipant = {
+  id: string
+  user: {
+    id: string
+    username: string
+    avatar?: string
+    team?: string
+  }
+  status: string
+  joinedAt: string
 }
 
 // View-model used across UI components on tournament page
@@ -67,5 +81,6 @@ export type TournamentView = {
   platform?: string
   region?: string
   organizer?: string
+  participantsList?: TournamentParticipant[]
 }
 
