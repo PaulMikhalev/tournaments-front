@@ -100,8 +100,8 @@
 </template>
 
 <script setup lang="ts">
-import { loginSchema } from '@/app/schema/auth'
-import type { LoginFormValues, LoginFormErrors } from '@/app/types/auth'
+import { loginSchema } from '@/schema/auth'
+import type { LoginFormValues, LoginFormErrors } from '@/types/auth'
 
 // События
 const emit = defineEmits<{

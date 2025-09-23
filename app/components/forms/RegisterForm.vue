@@ -151,8 +151,8 @@
 </template>
 
 <script setup lang="ts">
-import { registerSchema } from '@/app/schema/auth'
-import type { RegisterFormValues, RegisterFormErrors } from '@/app/types/auth'
+import { registerSchema } from '@/schema/auth'
+import type { RegisterFormValues, RegisterFormErrors } from '@/types/auth'
 
 // События
 const emit = defineEmits<{

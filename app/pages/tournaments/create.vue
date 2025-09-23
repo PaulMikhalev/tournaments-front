@@ -321,8 +321,8 @@
 </template>
 
 <script setup lang="ts">
-import { tournamentCreateSchema } from '@/app/schema/tournament'
-import type { TournamentCreateValues } from '@/app/types/tournament'
+import { tournamentCreateSchema } from '@/schema/tournament'
+import type { TournamentCreateValues } from '@/types/tournament'
 
 // Game options for select
 const gameOptions = [
@@ -362,7 +362,7 @@ const createTournament = async () => {
   }
 
   try {
-    const { $api } = useNuxtApp()
+    const { $api } = useNuxtApp() as any
     const startDateISO = new Date(`${form.value.startDate}T${form.value.startTime}:00`).toISOString()
     const payload = {
       title: parsed.data.name,
