@@ -1,7 +1,7 @@
 <template>
   <header class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-    <div class="backdrop-blur-sm bg-[rgba(16,24,40,0.95)] border-b border-[#1e2939] px-[208.5px] py-4 pointer-events-auto">
-      <div class="flex items-center justify-between gap-[188.3px]">
+    <div class="backdrop-blur-sm bg-[rgba(16,24,40,0.95)] border-b border-[#1e2939] pointer-events-auto">
+      <div class="container mx-auto max-w-[1488px] px-4 py-4 flex items-center justify-between gap-8">
         <!-- Logo -->
         <div class="flex items-center">
           <svg class="w-8 h-8 mr-2" viewBox="0 0 32 32" fill="none">
@@ -11,19 +11,9 @@
             <span class="text-[18.75px] font-bold text-white leading-[28px]">CyberTournaments</span>
           </NuxtLink>
         </div>
-        
-        <!-- Navigation -->
-        <nav class="flex items-center space-x-8">
-          <NuxtLink to="/" class="text-[14.5px] text-white leading-[24px] hover:text-[#00ffe0] transition-colors duration-200">
-            Главная
-          </NuxtLink>
-          <NuxtLink to="/tournaments" class="text-[15.125px] text-[#d1d5dc] leading-[24px] hover:text-white transition-colors duration-200">
-            Турниры
-          </NuxtLink>
-        </nav>
-        
+
         <!-- User Actions -->
-        <div class="flex items-center space-x-4">
+        <div class="lg:flex hidden items-center space-x-4">
           <UButton 
             to="/tournaments/create"
             variant="ghost" 
@@ -52,6 +42,7 @@
             Управление
           </UButton>
           <UButton 
+            v-if="!isAuthenticated"
             to="/login"
             variant="ghost" 
             size="sm"
@@ -60,6 +51,7 @@
             Войти
           </UButton>
           <UButton 
+            v-if="!isAuthenticated"
             to="/register"
             variant="ghost" 
             size="sm"
@@ -107,10 +99,10 @@
 
     <!-- Mobile Menu -->
     <div 
-      class="lg:hidden overflow-hidden transition-all duration-300 bg-ebony border-t border-mirage"
+      class="lg:hidden overflow-hidden transition-all duration-300 bg-ebony "
       :class="{ 'max-h-96': isMobileMenuOpen, 'max-h-0': !isMobileMenuOpen }"
     >
-      <nav class="px-4 sm:px-6 py-4 space-y-4">
+      <nav class="container mx-auto max-w-[1488px] px-4 sm:px-6 py-4 space-y-4">
         <NuxtLink 
           to="/" 
           class="block text-white hover:text-cyan-400 transition-colors duration-200 font-normal py-2"
@@ -162,6 +154,7 @@
           
           <div class="space-y-2">
             <UButton 
+              v-if="!isAuthenticated"
               to="/login"
               variant="ghost"
               size="sm"
@@ -171,6 +164,7 @@
               Войти
             </UButton>
             <UButton 
+              v-if="!isAuthenticated"
               to="/register"
               variant="ghost"
               size="sm"
@@ -205,6 +199,8 @@
 
 <script setup lang="ts">
 const isMobileMenuOpen = ref(false)
+const { accessToken } = useApi()
+const isAuthenticated = computed(() => Boolean(accessToken.value))
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
