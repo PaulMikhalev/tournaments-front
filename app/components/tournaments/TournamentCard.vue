@@ -95,32 +95,24 @@
 </template>
 
 <script setup lang="ts">
-interface Tournament {
-  id: number
-  title: string
-  game: string
-  date: string
-  prize: string
-  participants: number
-  maxParticipants: number
-  status: 'live' | 'registration' | 'upcoming' | 'completed'
-  progress: number
-  image: string
-  featured?: boolean
+import type { Tournament } from '~/types/tournament'
+
+interface TournamentCardProps {
+  tournament: Tournament & { featured?: boolean }
 }
 
-const props = defineProps<{
-  tournament: Tournament
-}>()
+const props = defineProps<TournamentCardProps>()
 
 const statusBadgeClass = computed(() => {
   switch (props.tournament.status) {
-    case 'live':
+    case 'LIVE':
       return 'bg-[#fb2c36] text-white'
-    case 'registration':
+    case 'REGISTRATION':
       return 'bg-[#00ffe0] text-black'
-    case 'upcoming':
-      return 'bg-[#f0b100] text-black'
+    case 'COMPLETED':
+      return 'bg-[#364153] text-[#99a1af]'
+    case 'CANCELLED':
+      return 'bg-[#364153] text-[#99a1af]'
     default:
       return 'bg-[#364153] text-[#99a1af]'
   }
@@ -128,12 +120,14 @@ const statusBadgeClass = computed(() => {
 
 const statusText = computed(() => {
   switch (props.tournament.status) {
-    case 'live':
+    case 'LIVE':
       return 'Live'
-    case 'registration':
+    case 'REGISTRATION':
       return 'Идет регистрация'
-    case 'upcoming':
-      return 'Скоро'
+    case 'COMPLETED':
+      return 'Завершен'
+    case 'CANCELLED':
+      return 'Отменен'
     default:
       return 'Неизвестно'
   }

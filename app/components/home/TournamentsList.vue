@@ -1,152 +1,69 @@
 <template>
-  <!-- Filters Section -->
-  <section class="bg-[rgba(30,41,57,0.5)] border-b border-[#364153] px-[208.5px] py-6">
-    <div class="flex items-center gap-4">
-      <!-- Left Side - Game Filter and Search -->
-      <div class="flex items-center gap-4 flex-1">
-        <!-- Game Filter Dropdown -->
-        <div class="w-64">
-          <div class="bg-[rgba(38,38,38,0.3)] border border-[#4a5565] rounded-[8px] h-[36px] px-[13px] py-[9px] flex items-center justify-between">
-            <span class="text-[12.797px] text-[#a1a1a1] leading-[20px]">Все игры</span>
-            <svg class="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6l4 4 4-4" stroke="#a1a1a1" stroke-width="1.33"/>
-            </svg>
-          </div>
-        </div>
-        
-        <!-- Search Input -->
-        <div class="flex-1 max-w-[448px] relative">
-          <div class="bg-[rgba(38,38,38,0.3)] border border-[#4a5565] rounded-[8px] h-[36px] flex items-center">
-            <svg class="w-4 h-4 ml-3 text-[#99a1af]" viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1"/>
-              <path d="m12 12-3-3" stroke="currentColor" stroke-width="1"/>
-            </svg>
-            <input 
-              v-model="searchQuery"
-              placeholder="Поиск турниров..."
-              class="bg-transparent text-[12.906px] text-[#99a1af] placeholder-[#99a1af] ml-2 flex-1 outline-none"
-            />
-          </div>
-        </div>
-      </div>
-      
-      <!-- Right Side - Filters Button -->
-      <button class="bg-[rgba(38,38,38,0.3)] border border-neutral-800 rounded-[8px] h-[36px] px-[13px] flex items-center gap-2 text-[13.234px] font-medium text-[#d1d5dc] leading-[20px]">
-        <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
-          <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.33"/>
-        </svg>
-        Фильтры
-      </button>
-    </div>
-  </section>
+  <div>
+    <!-- Filters Section -->
+    <TournamentFilters 
+      :search-query="searchQuery"
+      @update:search-query="searchQuery = $event"
+    />
 
-  <!-- Tournaments Section -->
-  <section class="bg-[#101828] px-[184.5px] py-[48px]">
-    <div class="max-w-[1536px] mx-auto px-6">
-      <!-- Section Header -->
-      <div class="flex justify-between items-center mb-8">
-        <div class="flex flex-col gap-2">
-          <h2 class="text-[29.063px] font-bold text-white leading-[36px]">
-            Активные турниры
-          </h2>
-          <p class="text-[14.75px] text-[#99a1af] leading-[24px]">
-            Присоединяйтесь к турнирам и сражайтесь за призы
-          </p>
-        </div>
-        <div>
-          <span class="text-[13.016px] text-[#99a1af] leading-[20px]">
-            Найдено: <span class="text-[#00ffe0] font-medium">{{ filteredTournaments.length }}</span> турниров
-          </span>
-        </div>
-      </div>
-
-      <!-- Tournaments Grid -->
-      <div class="grid grid-cols-3 gap-4 mb-4">
-        <TournamentCard 
-          v-for="(tournament, index) in filteredTournaments" 
-          :key="tournament.id"
-          :tournament="tournament"
+    <!-- Tournaments Section -->
+    <section class="bg-[#101828] px-[184.5px] py-[48px]">
+      <div class="max-w-[1536px] mx-auto px-6">
+        <!-- Section Header -->
+        <TournamentSectionHeader
+          title="Активные турниры"
+          description="Присоединяйтесь к турнирам и сражайтесь за призы"
+          :count="filteredTournaments.length"
         />
-      </div>
 
-      <!-- Load More Button -->
-      <div class="flex justify-center pt-4">
-        <button class="bg-[#1e2939] border border-[#364153] rounded-[10px] px-8 py-3 text-[14.5px] text-white leading-[24px]">
-          Загрузить еще
-        </button>
+        <!-- States: Loading, Error, Empty -->
+        <TournamentStates
+          :is-loading="isLoading"
+          :error="error"
+          :tournaments="filteredTournaments"
+          @retry="loadTournaments"
+        />
+
+        <!-- Tournaments Grid -->
+        <div v-if="!isLoading && !error && filteredTournaments.length > 0" class="grid grid-cols-3 gap-4 mb-4">
+          <TournamentCard 
+            v-for="tournament in filteredTournaments" 
+            :key="tournament.id"
+            :tournament="tournament"
+          />
+        </div>
+
+        <!-- Load More Button -->
+        <div v-if="!isLoading && !error && filteredTournaments.length > 0" class="flex justify-center pt-4">
+          <button 
+            @click="loadTournaments"
+            class="bg-[#1e2939] border border-[#364153] rounded-[10px] px-8 py-3 text-[14.5px] text-white leading-[24px] hover:bg-[#2a3441] transition-colors"
+          >
+            Обновить список
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 import TournamentCard from '~/components/tournaments/TournamentCard.vue'
+import TournamentFilters from '~/components/tournaments/TournamentFilters.vue'
+import TournamentStates from '~/components/tournaments/TournamentStates.vue'
+import TournamentSectionHeader from '~/components/tournaments/TournamentSectionHeader.vue'
+import { useTournaments } from '~/composables/useTournaments'
+import { useTournamentFilters } from '~/composables/useTournamentFilters'
 
-// Reactive variables for filtering and search
-const selectedGame = ref('')
-const searchQuery = ref('')
+// Используем composables для логики
+const { tournaments, isLoading, error, loadTournaments } = useTournaments()
+const { searchQuery, filterTournaments } = useTournamentFilters()
 
-// Game options for dropdown
-const gameOptions = [
-  { label: 'Все игры', value: '' },
-  { label: 'Soulcalibur VI', value: 'Soulcalibur VI' },
-  { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
-  { label: 'Dota 2', value: 'Dota 2' },
-  { label: 'Valorant', value: 'Valorant' },
-  { label: 'League of Legends', value: 'League of Legends' }
-]
+// Computed для отфильтрованных турниров
+const filteredTournaments = computed(() => filterTournaments(tournaments.value))
 
-// Game images from Figma
-const gameImages = {
-  'Soulcalibur VI': 'http://localhost:3845/assets/04ae138ca535efac6364e2aef8861940905afd52.png',
-  'Counter-Strike 2': 'http://localhost:3845/assets/b890c61489a080992ad7e99adabb1145e6d59606.png',
-  'Dota 2': 'http://localhost:3845/assets/edb346e5c89bf40002647fa0950f13b3c315d1e7.png',
-  'Valorant': 'http://localhost:3845/assets/44c786423fd72e67c98aa1a1f3764001cb6b98df.png',
-  'League of Legends': 'http://localhost:3845/assets/860dc6bc2b9ea67637fbb0b3b403e100cabd221b.png'
-}
-
-const tournaments = ref<any[]>([])
-
+// Загружаем турниры при монтировании
 onMounted(async () => {
-  try {
-    const { $api } = useNuxtApp()
-    const data = await $api('/tournaments', { method: 'GET' })
-    // Ожидаем массив турниров с полями, маппим при необходимости
-    tournaments.value = Array.isArray(data) ? data.map((t: any) => ({
-      id: t.id,
-      title: t.title,
-      game: t.game,
-      date: t.startDate ? new Date(t.startDate).toLocaleDateString('ru-RU') : '',
-      prize: t.prizePool ? `$${t.prizePool}` : '',
-      participants: t.participantsCount ?? 0,
-      maxParticipants: t.maxParticipants ?? 16,
-      status: t.status ?? 'registration',
-      progress: 0,
-      image: gameImages[t.game] || gameImages['Counter-Strike 2']
-    })) : []
-  } catch (e) {
-    console.error('Failed to load tournaments', e)
-  }
-})
-
-// Computed property for filtered tournaments
-const filteredTournaments = computed(() => {
-  let filtered = tournaments.value
-
-  // Filter by game
-  if (selectedGame.value) {
-    filtered = filtered.filter(tournament => tournament.game === selectedGame.value)
-  }
-
-  // Filter by search query
-  if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(tournament => 
-      tournament.title.toLowerCase().includes(query) ||
-      tournament.game.toLowerCase().includes(query)
-    )
-  }
-
-  return filtered
+  await loadTournaments()
 })
 </script>

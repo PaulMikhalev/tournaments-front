@@ -114,19 +114,23 @@ export type MatchDto = {
   completedAt?: string
 }
 
-// View-model used across UI components on tournament page
-export type TournamentView = {
+// Tournament interface for UI components (TournamentCard, TournamentsList)
+export interface Tournament {
   id: string
   title: string
   game: string
   date: string
-  time?: string
   prize: string
   participants: number
   maxParticipants: number
   status: TournamentStatus
   progress: number
   image: string
+}
+
+// View-model used across UI components on tournament page
+export interface TournamentView extends Tournament {
+  time?: string
   description: string
   format?: string
   platform?: string
