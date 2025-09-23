@@ -37,7 +37,7 @@ onMounted(async () => {
       game: data.game,
       date: data.startDate ? new Date(data.startDate).toLocaleDateString('ru-RU') : '',
       time: data.startDate ? new Date(data.startDate).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : '',
-      prize: data.prizePool ? `$${data.prizePool}` : '',
+      prize: data.prizePool ? `${data.prizePool}` : 'Хуёв тачка',
       participants: data.participantsCount ?? 0,
       maxParticipants: data.maxParticipants ?? 16,
       status: data.status ?? 'upcoming',

@@ -70,46 +70,26 @@
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <!-- Date -->
             <div class="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.33 1.33V4" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10.67 1.33V4" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M2 6.67H14" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M2 14.67V4C2 3.6 2.4 3.33 2.67 3.33H13.33C13.6 3.33 14 3.6 14 4V14.67H2Z" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <UIcon name="i-heroicons-calendar-20-solid" />
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.date }}</span>
             </div>
             
             <!-- Time -->
             <div class="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="8" cy="8" r="6" stroke="#99A1AF" stroke-width="1.33"/>
-                <path d="M8 4V8L10.5 10.5" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <UIcon name="i-heroicons-clock" />
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.time || '19:00 MSK' }}</span>
             </div>
             
             <!-- Prize -->
             <div class="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.67 9.77H6.67V14.65H4.67V9.77Z" stroke="#F0B100" stroke-width="1.33"/>
-                <path d="M9.33 9.77H11.33V14.65H9.33V9.77Z" stroke="#F0B100" stroke-width="1.33"/>
-                <path d="M12 2.67H14.67V6H12V2.67Z" stroke="#F0B100" stroke-width="1.33"/>
-                <path d="M2.67 14.67H13.33" stroke="#F0B100" stroke-width="1.33"/>
-                <path d="M4 1.33H12V10H4V1.33Z" stroke="#F0B100" stroke-width="1.33"/>
-                <path d="M1.33 2.67H4V6H1.33V2.67Z" stroke="#F0B100" stroke-width="1.33"/>
-              </svg>
-              <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.prize }}</span>
+              <UIcon name="i-heroicons-gift" />
+              <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.prize || '0' }}</span>
             </div>
             
             <!-- Participants -->
             <div class="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 7C12.1046 7 13 6.10457 13 5C13 3.89543 12.1046 3 11 3C9.89543 3 9 3.89543 9 5C9 6.10457 9.89543 7 11 7Z" stroke="#99A1AF" stroke-width="1.33"/>
-                <path d="M5 7C6.10457 7 7 6.10457 7 5C7 3.89543 6.10457 3 5 3C3.89543 3 3 3.89543 3 5C3 6.10457 3.89543 7 5 7Z" stroke="#99A1AF" stroke-width="1.33"/>
-                <path d="M11 9H15V13H11" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M1 9H5V13H1" stroke="#99A1AF" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.participants }}/{{ tournament.maxParticipants }} команд</span>
+              <UIcon name="i-heroicons-users-16-solid" />
+              <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.participants }}/{{ tournament.maxParticipants }} участников</span>
             </div>
           </div>
           
