@@ -1,3 +1,15 @@
+## [2025-09-23] - Страница создания турнира: форма, валидация, контейнер
+### Добавлено
+- Обернута страница `app/pages/tournaments/create.vue` в `UForm` с Zod-схемой `tournamentCreateSchema`.
+- Добавлен глобальный класс контейнера `.site-container` в `app/assets/css/main.css`.
+- Вынесена форма создания турнира в компонент `app/components/forms/TournamentCreateForm.vue` и подключена на странице.
+
+### Изменено
+- Инлайновые отступы заменены на `.site-container` по аналогии с `Header.vue`.
+- Кнопка создания теперь сабмитит форму с валидацией.
+
+### Исправлено
+- Привязка API: переход на composable `useApi().api` для POST `/tournaments`.
 ## [2025-09-23] - Рефакторинг типизации и валидации на фронтенде
 ### Добавлено
 - Папка `app/types` с типами: `auth.ts`, `tournament.ts`.

@@ -4,3 +4,8 @@
 html {
   font-family: 'Roboto', sans-serif;
 }
+
+/* Глобальный контейнер сайта: повторяет правило из Header */
+.site-container {
+  @apply container mx-auto max-w-[1236px] px-4;
+}
