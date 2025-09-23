@@ -27,7 +27,7 @@
 
       <div class="flex gap-8">
         <!-- Left Column - Main Form -->
-        <FormsTournamentCreateForm class="flex-1" :schema="tournamentCreateSchema" :state="form" :game-options="gameOptions" @submit="onSubmit" />
+        <FormsTournamentCreateForm class="flex-1" :schema="tournamentCreateSchema" :state="form" @submit="onSubmit" />
         
         <!-- Right Column - Sidebar -->
         <div class="w-80 space-y-6">
@@ -113,14 +113,7 @@
 import { tournamentCreateSchema } from '@/schema/tournament'
 import type { TournamentCreateValues } from '@/types/tournament'
 
-// Game options for select
-const gameOptions = [
-  { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
-  { label: 'Dota 2', value: 'Dota 2' },
-  { label: 'Valorant', value: 'Valorant' },
-  { label: 'League of Legends', value: 'League of Legends' },
-  { label: 'Soulcalibur VI', value: 'Soulcalibur VI' }
-]
+
 
 // Form data
 const form = ref<TournamentCreateValues>({
@@ -130,8 +123,8 @@ const form = ref<TournamentCreateValues>({
   prize: '',
   startDate: '',
   startTime: '',
-  maxParticipants: '16',
-  format: 'single-elimination',
+  maxParticipants: 8,
+  format: 'elimination',
   isPublic: true,
   registrationOpen: true,
   rules: ''

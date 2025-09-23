@@ -6,7 +6,7 @@ export type TournamentCreateValues = {
   startDate: string
   startTime: string
   maxParticipants: string | number
-  format: 'single-elimination' | 'double-elimination' | 'round-robin'
+  format: 'elimination' | 'single-elimination' | 'double-elimination' | 'round-robin'
   isPublic: boolean
   registrationOpen: boolean
   rules: string

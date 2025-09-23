@@ -24,7 +24,7 @@
         <!-- Game and Prize -->
         <div class="grid grid-cols-2 gap-4 col-span-2">
           <UFormField class="w-full" name="game" label="Игра *">
-            <USelect name="game" v-model="state.game" :options="gameOptions" placeholder="Выберите игру" size="lg" class="bg-[#101828] border-[#374151] w-full" />
+            <USelect name="game" v-model="state.game" :items="gameOptions" placeholder="Выберите игру" size="lg" class="bg-[#101828] border-[#374151] w-full" />
           </UFormField>
           <UFormField name="prize" label="Призовой фонд">
             <UInput name="prize" v-model="state.prize" placeholder="$0" size="lg" class="bg-[#101828] border-[#374151] w-full" />
@@ -76,10 +76,10 @@
         <!-- Max Participants and Format -->
         <div class="grid grid-cols-2 gap-4">
           <UFormField name="maxParticipants" label="Максимум участников">
-            <USelect name="maxParticipants" v-model="maxParticipantsModel" :options="participantOptions" placeholder="Выберите количество" size="lg" class="bg-[#101828] border-[#374151] h-[36px]" />
+            <USelect name="maxParticipants" v-model="maxParticipantsModel" :items="participantOptions" placeholder="Выберите количество" size="lg" class="bg-[#101828] border-[#374151] h-[36px]" />
           </UFormField>
           <UFormField name="format" label="Формат турнира">
-            <USelect name="format" v-model="state.format" :options="formatOptions" placeholder="Выберите формат" size="lg" class="bg-[#101828] border-[#374151] h-[36px]" />
+            <USelect name="format" v-model="state.format" :items="formatOptions" placeholder="Выберите формат" size="lg" class="bg-[#101828] border-[#374151] h-[36px]" />
           </UFormField>
         </div>
 
@@ -126,29 +126,38 @@ import { parseDate, getLocalTimeZone } from '@internationalized/date'
 const props = defineProps<{ 
   state: TournamentCreateValues,
   schema: any,
-  gameOptions: Array<{ label: string, value: string }>
 }>()
 
 defineEmits<{ (e: 'submit'): void }>()
 
 const state = toRef(props, 'state')
 const schema = toRef(props, 'schema')
-const gameOptions = toRef(props, 'gameOptions')
+
+// Game options for select
+const gameOptions = ref([
+  // { label: 'Counter-Strike 2', value: 'Counter-Strike 2' },
+  // { label: 'Dota 2', value: 'Dota 2' },
+  // { label: 'Valorant', value: 'Valorant' },
+  // { label: 'League of Legends', value: 'League of Legends' },
+  { label: 'Soulcalibur VI', value: 'Soulcalibur VI' }
+])
 
 const df = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'medium' })
 
-const participantOptions = [
-  { label: '16 участников', value: 16 },
-  { label: '32 участника', value: 32 },
-  { label: '64 участника', value: 64 },
-  { label: '128 участников', value: 128 }
-]
+const participantOptions = ref([
+  { label: '8 участников', value: 8 },
+  // { label: '16 участников', value: 16 },
+  // { label: '32 участника', value: 32 },
+  // { label: '64 участника', value: 64 },
+  // { label: '128 участников', value: 128 }
+])
 
-const formatOptions = [
-  { label: 'Single Elimination', value: 'single-elimination' },
-  { label: 'Double Elimination', value: 'double-elimination' },
-  { label: 'Round Robin', value: 'round-robin' }
-]
+const formatOptions = ref([
+  // { label: 'Single Elimination', value: 'single-elimination' },
+  // { label: 'Double Elimination', value: 'double-elimination' },
+  // { label: 'Round Robin', value: 'round-robin' }
+  { label: 'На вылет', value: 'elimination' },
+])
 
 const startDateModel = computed<DateValue | null>({
   get: () => {

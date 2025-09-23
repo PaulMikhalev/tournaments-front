@@ -15,7 +15,7 @@ export const tournamentCreateSchema = z.object({
     .union([z.string(), z.number()])
     .transform((v) => Number(v))
     .pipe(z.number().int().min(2).max(1024)),
-  format: z.enum(['single-elimination', 'double-elimination', 'round-robin']),
+  format: z.enum(['elimination', 'single-elimination', 'double-elimination', 'round-robin']),
   isPublic: z.boolean(),
   registrationOpen: z.boolean(),
   rules: z.string().optional().default('')
