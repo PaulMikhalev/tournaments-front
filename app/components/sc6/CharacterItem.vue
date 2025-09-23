@@ -1,9 +1,9 @@
 <template>
     <div 
-      class="relative size-28 text-black flex items-center justify-center text-center p-2 cursor-pointer"
-      :class="character ? 'character-avatar' : 'char-null'"
+      class="relative size-28 text-black flex items-center justify-center text-center p-2 cursor-pointer transition-transform duration-200 hover:scale-105"
+      :class="character ? 'bg-cover bg-center bg-no-repeat' : 'bg-red-500 text-white font-bold rounded-lg'"
       :title="character ? getCharacterName(character) : 'Random'"
-      :style="character ? { backgroundImage: `url('/sc6/chars/${character.toLowerCase()}.png')` } : {}"
+      :style="character ? { backgroundImage: `url('/sc6/chars/char_${character.toLowerCase()}.png')` } : {}"
     >
       <span v-if="!character" class="text-white font-bold">Random</span>
     </div>
@@ -17,27 +17,3 @@ const props = defineProps<{
 }>()
 
 </script>
-
-<style scoped>
-.character-avatar {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-
-.character-avatar:hover {
-  transform: scale(1.05);
-}
-
-.char-null {
-  background: #ef4444;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border-radius: 8px;
-}
-</style>
