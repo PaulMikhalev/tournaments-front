@@ -1,18 +1,5 @@
 <template>
   <div class="min-h-screen bg-[#101828]">
-    <!-- Back Navigation -->
-    <div class="px-[208.5px] py-8">
-      <NuxtLink 
-        to="/"
-        class="inline-flex items-center gap-2 text-[14px] leading-[20px] text-[#99a1af] hover:text-white transition-colors duration-200"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Назад
-      </NuxtLink>
-    </div>
-
     <!-- Main Content -->
     <div class="px-[376px] pb-[92px]">
       <!-- Profile Header -->
@@ -30,11 +17,9 @@
                     class="w-full h-full object-cover"
                   />
                 </div>
-                <button class="absolute bottom-0 right-0 w-8 h-8 bg-[#00ffe0] rounded-full flex items-center justify-center hover:bg-[#00e6cc] transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.333 2A1.333 1.333 0 0 0 9.726 2.391L2.667 9.45v2.883h2.883l7.059-7.059a1.333 1.333 0 0 0 0-1.885l-1.276-1.276Z" fill="#101828"/>
-                  </svg>
-                </button>
+                <UButton class="absolute bottom-0 right-0 size-8 bg-[#00ffe0] rounded-full hover:bg-[#00e6cc]" icon="i-heroicons-pencil-solid">
+                  
+                </UButton>
               </div>
 
               <!-- User Info -->
@@ -97,26 +82,19 @@
               <!-- Additional Info -->
               <div class="space-y-4 mb-8">
                 <div class="flex items-center gap-2" v-if="user.team">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.667 14V12.667C10.667 11.95 10.382 11.263 9.882 10.763C9.382 10.263 8.694 9.978 7.978 9.978H3.311C2.595 9.978 1.908 10.263 1.408 10.763C0.908 11.263 0.622 11.95 0.622 12.667V14M13.333 5.333V9.333M15.333 7.333H11.333M8.311 4.667C8.311 6.135 7.135 7.311 5.667 7.311C4.198 7.311 3.022 6.135 3.022 4.667C3.022 3.198 4.198 2.022 5.667 2.022C7.135 2.022 8.311 3.198 8.311 4.667Z" stroke="#99a1af" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                  <UIcon name="i-heroicons-user-group-20-solid"/>
                   <span class="text-[20px] leading-[20px] text-[#d1d5dc]">
                     Команда: {{ user.team }}
                   </span>
                 </div>
                 <div class="flex items-center gap-2" v-if="memberSince">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.667A6.667 6.667 0 1 0 8 1.333a6.667 6.667 0 0 0 0 13.334ZM8 4.667V8l2.667 2.667" stroke="#99a1af" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                  <UIcon name="i-heroicons-calendar-20-solid"/>
                   <span class="text-[20px] leading-[20px] text-[#d1d5dc]">
                     На платформе с {{ memberSince }}
                   </span>
                 </div>
                 <div class="flex items-center gap-2" v-if="lastActivity">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.667A6.667 6.667 0 1 0 8 1.333a6.667 6.667 0 0 0 0 13.334Z" stroke="#99a1af" stroke-width="1.33"/>
-                    <path d="M8 8A2.667 2.667 0 1 0 8 2.667 2.667 2.667 0 0 0 8 8Z" fill="#00ffe0"/>
-                  </svg>
+                  <UIcon name="i-heroicons-clock-20-solid"/>
                   <span class="text-[20px] leading-[20px] text-[#d1d5dc]">
                     Последняя активность: {{ lastActivity }}
                   </span>
@@ -128,13 +106,9 @@
                 color="primary"
                 variant="solid"
                 size="lg"
+                icon="i-heroicons-pencil-solid"
                 class="bg-[#00ffe0] hover:bg-[#00e6cc] text-[#101828] font-medium"
               >
-                <template #leading>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.333 2A1.333 1.333 0 0 0 9.726 2.391L2.667 9.45v2.883h2.883l7.059-7.059a1.333 1.333 0 0 0 0-1.885l-1.276-1.276Z" fill="currentColor"/>
-                  </svg>
-                </template>
                 Редактировать профиль
               </UButton>
             </div>
@@ -176,9 +150,7 @@
           <div class="bg-[#1e2939] border border-[#374151] rounded-lg">
             <div class="px-6 py-6 border-b border-[#374151]">
               <div class="flex items-center gap-2">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 18C14.418 18 18 14.418 18 10S14.418 2 10 2 2 5.582 2 10s3.582 8 8 8ZM10 6V10l4 4" stroke="#00ffe0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <UIcon name="i-heroicons-trophy"/>
                 <h3 class="text-[16px] leading-[16px] font-semibold text-white">
                   История участия в турнирах
                 </h3>

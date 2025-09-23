@@ -56,6 +56,6 @@ onMounted(async () => {
 
 // Set page title
 useHead(() => ({
-  title: `${tournament.value?.title || 'Турнир'} - Турнир | CyberTournaments`
+  title: `${tournament.value?.title || 'Турнир'} - Турнир | BlackholeTournaments`
 }))
 </script>

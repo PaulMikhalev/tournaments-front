@@ -1,22 +1,9 @@
 <template>
   <div class="min-h-screen bg-[#101828]">
-    <!-- Back Navigation -->
-    <div class="site-container py-8">
-      <NuxtLink 
-        to="/"
-        class="inline-flex items-center gap-2 text-[14px] leading-[20px] text-[#99a1af] hover:text-white transition-colors duration-200"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Назад к турнирам
-      </NuxtLink>
-    </div>
-
     <!-- Main Content -->
-    <div class="site-container pb-[92px]">
+    <div class="site-container pt-8 pb-16">
       <!-- Header -->
-      <div class="mb-[100px]">
+      <div class="mb-8">
         <h1 class="text-[36px] leading-[36px] font-bold text-white mb-[12px]">
           Создать турнир
         </h1>
@@ -39,20 +26,7 @@
               </h3>
             </div>
             <div class="p-6">
-              <div class="border-2 border-dashed border-[#374151] rounded-lg h-[128px] flex flex-col items-center justify-center mb-4">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-2">
-                  <path d="M16 10.667V21.333M10.667 16H21.333M28 16C28 22.627 22.627 28 16 28C9.373 28 4 22.627 4 16C4 9.373 9.373 4 16 4C22.627 4 28 9.373 28 16Z" stroke="#99a1af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <p class="text-[20px] leading-[20px] text-[#99a1af] text-center">
-                  Загрузите изображение
-                </p>
-              </div>
-              <button class="w-full h-[36px] bg-[#374151] hover:bg-[#4b5563] text-white rounded flex items-center justify-center gap-2 transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14 10V12.667C14 13.403 13.403 14 12.667 14H3.333C2.597 14 2 13.403 2 12.667V10M11.333 6.667L8 3.333M8 3.333L4.667 6.667M8 3.333V10" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Выбрать изображение
-              </button>
+              <UFileUpload class="w-full min-h-48" label="Загрузить изображение" />
             </div>
           </div>
 

@@ -1,19 +1,6 @@
 <template>
   <section class="bg-[#101828] border-b border-[#1e2939]">
     <div class="px-4 lg:px-[208.5px] py-4">
-      <!-- Back Navigation -->
-      <div class="mb-4">
-        <NuxtLink 
-          to="/tournaments"
-          class="inline-flex items-center gap-3 px-3 py-2 text-[16px] leading-[20px] text-[#d1d5dc] hover:text-white transition-colors duration-200 bg-[#1e2939] rounded-lg"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Назад к турнирам
-        </NuxtLink>
-      </div>
-
       <!-- Tournament Banner -->
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Tournament Image -->
@@ -53,16 +40,7 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center gap-2 ml-4">
-              <button class="w-8 h-8 flex items-center justify-center bg-[#1e2939] hover:bg-[#374151] rounded transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.5 1.5L10 5L13.5 5.5L10.75 8.25L11.5 12L8.5 10L5.5 12L6.25 8.25L3.5 5.5L7 5L8.5 1.5Z" stroke="#d1d5dc" stroke-width="1" fill="none"/>
-                </svg>
-              </button>
-              <button class="w-8 h-8 flex items-center justify-center bg-[#1e2939] hover:bg-[#374151] rounded transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 12L6 8L10 4" stroke="#d1d5dc" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
+              <UButton class="size-8 bg-[#1e2939] hover:bg-[#374151] rounded text-[#99a1af]" icon="i-heroicons-share"/>
             </div>
           </div>
           
@@ -70,25 +48,25 @@
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <!-- Date -->
             <div class="flex items-center gap-2">
-              <UIcon name="i-heroicons-calendar-20-solid" />
+              <UIcon class="size-6" name="i-heroicons-calendar-20-solid" />
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.date }}</span>
             </div>
             
             <!-- Time -->
             <div class="flex items-center gap-2">
-              <UIcon name="i-heroicons-clock" />
+              <UIcon class="size-6" name="i-heroicons-clock" />
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.time || '19:00 MSK' }}</span>
             </div>
             
             <!-- Prize -->
             <div class="flex items-center gap-2">
-              <UIcon name="i-heroicons-gift" />
+              <UIcon class="size-6" name="i-heroicons-trophy"/>
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.prize || '0' }}</span>
             </div>
             
             <!-- Participants -->
             <div class="flex items-center gap-2">
-              <UIcon name="i-heroicons-users-16-solid" />
+              <UIcon class="size-6" name="i-heroicons-users-16-solid" />
               <span class="text-[16px] leading-[20px] text-[#99a1af]">{{ tournament.participants }}/{{ tournament.maxParticipants }} участников</span>
             </div>
           </div>
