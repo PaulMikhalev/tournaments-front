@@ -9,6 +9,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
+    '@nuxt/icon',
     '@nuxt/eslint',
     '@nuxt/scripts',
     '@nuxt/test-utils',
