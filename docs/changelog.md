@@ -1,3 +1,17 @@
+## [2025-01-27] - Добавлены типы персонажей Soulcalibur 6
+### Добавлено
+- Файл `app/types/soulcalibur.ts` с enum списком всех персонажей из Soulcalibur 6
+- Константы персонажей: основной ростер, DLC персонажи, гостевые персонажи
+- Типы `SoulcaliburCharacter` для типизации выбора персонажа
+- Словари `soulcaliburCharacterNames` и `soulcaliburCharacterWeapons` для отображения имен и оружия
+- Утилитарные функции: `getCharacterName`, `getCharacterWeapon`, `getAllCharacters`, `getMainRosterCharacters`, `getDLCCharacters`
+
+### Изменено
+- Подготовлена типизация для выбора персонажа в турнирах Soulcalibur 6
+
+### Исправлено
+- —
+
 ## [2025-09-23] - Актуализация типов турниров на основе API
 ### Добавлено
 - Обновлены константы статусов турниров: `REGISTRATION`, `LIVE`, `COMPLETED`, `CANCELLED`
